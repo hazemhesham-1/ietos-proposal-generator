@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import axios from "axios";
 import { CalendarCheckIcon, FlaskConicalIcon, WrenchIcon } from "lucide-react";
 import { Checkbox } from "../../components/ui/Checkbox";
 import CustomFormField from "../../components/CustomFormField";
+import NavButtons from "../../components/NavButtons";
 
 const OperationDetails = () => {
+    const navigate = useNavigate();
     const [operations, setOperations] = useState({});
     const [schedules, setSchedules] = useState([]);
     const { setValue, watch } = useFormContext();
 
     const operationSchedule = watch("operationSchedule");
+    const isIncluded = (item, arr) => arr.some((value) => item.startsWith(value));
 
     function onScheduleChecked(item, checked) {
         const newSchedules = checked ? [...schedules, item.value] : schedules.filter((value) => value !== item.value);
         setSchedules(newSchedules);
-        setValue("operationSchedule", operationSchedule.filter((operation) => newSchedules.includes(operation.split("-")[0])));
+        setValue("operationSchedule", operationSchedule.filter((operation) => isIncluded(operation, newSchedules)));
     }
 
     useEffect(() => {
@@ -103,6 +107,7 @@ const OperationDetails = () => {
                     />
                 ))}
             </div>
+            <NavButtons onBackTo={() => navigate("/create-proposal/water-details")}/>
         </>
     );
 };

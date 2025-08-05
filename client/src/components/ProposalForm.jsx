@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { DropletsIcon, FileTextIcon, IdCardIcon, SettingsIcon } from "lucide-react";
+import { DollarSignIcon, DropletsIcon, FileTextIcon, IdCardIcon, SettingsIcon } from "lucide-react";
 import { Form } from "./ui/Form";
 import Stepper from "../features/steps/Stepper";
 
@@ -23,6 +23,11 @@ const navLinks = [
         icon: <SettingsIcon/>
     },
     {
+        url: "financial",
+        name: "Financial Offer",
+        icon: <DollarSignIcon/>
+    },
+    {
         url: "generate-doc",
         name: "Generate Document",
         icon: <FileTextIcon/>
@@ -30,18 +35,22 @@ const navLinks = [
 ];
 
 const defaultValues = {
-    id: "I25OPM123",
+    id: "",
     companyName: "",
-    projectLocation: "قرية عيون باي - العين السخنه",
+    projectLocation: "",
     projectGovernorate: "",
-    contactPerson: "مهندس وائل عبدالحكيم",
-    jobTitle: "مدير الإدارة الهندسيه",
-    issueDate: "2025-07-20",
+    contactPerson: "",
+    jobTitle: "",
+    issueDate: "2025-01-01",
     plantType: "",
-    flowrate: 900,
+    flowrate: 0,
     operationScope: [],
     operationSchedule: [],
-    chemicalManagement: []
+    chemicalManagement: [],
+    workValue: 0,
+    currency: "EGP",
+    contractDuration: 12,
+    offerValidity: 30,
 };
 
 const ProposalForm = ({ children }) => {

@@ -24,3 +24,5 @@ async function uploadData(collectionName, data) {
         console.log("Connection closed");
     }
 }
+
+module.exports = { uploadData };

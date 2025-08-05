@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import axios from "axios";
 import CustomFormField from "../../components/CustomFormField";
-import { Button } from "../../components/ui/Button";
+import NavButtons from "../../components/NavButtons";
 
 const WaterDetails = () => {
     const navigate = useNavigate();
@@ -42,21 +41,7 @@ const WaterDetails = () => {
                 description="Specify the daily treatment capacity of the plant."
                 min={80}
             />
-            <div className="grid grid-cols-2 gap-10 w-1/2 mx-auto mt-5">
-                <Button
-                    type="button"
-                    size="lg"
-                    className="flex-row-reverse"
-                    onClick={() => navigate("/create-proposal/client-info")}
-                >
-                    Back
-                    <ArrowLeftIcon/>
-                </Button>
-                <Button size="lg">
-                    Next
-                    <ArrowRightIcon/>
-                </Button>
-            </div>
+            <NavButtons onBackTo={() => navigate("/create-proposal/client-info")}/>
         </>
     );
 };

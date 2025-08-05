@@ -7,37 +7,11 @@ const Docxtemplater = require("docxtemplater");
 const PizZip = require("pizzip");
 const { DOMParser } = require("@xmldom/xmldom");
 
+const buildProposalContent = require("../helpers/buildProposalContent");
+
 router.post("/generate", (req, res) => {
     const proposalData = req.body;
-
-    const dataPath = path.join(__dirname, "../data", "operations.json");
-    const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
-
-    const operationTaskMap = new Map(jsonData.tasks.map((task) => [task.id, task.label]));
-    const chemicalMap = new Map(jsonData.chemicals.map((task) => [task.id, task.label]));
-    const excludedTasks = jsonData.tasks.filter((task) => !proposalData.operationScope.includes(task.id));
-
-    const maintenanceTasks = {
-        daily: [],
-        weekly: [],
-        monthly: []
-    };
-
-    for(const period in jsonData.schedules) {
-        jsonData.schedules[period].forEach((item) => {
-            if(proposalData.operationSchedule.includes(item.id)) {
-                maintenanceTasks[period].push({ value: item.label });
-            }
-        });
-    }
-
-    const proposalContent = {
-        ...proposalData,
-        maintenanceTasks,
-        operationScope: proposalData.operationScope.map((operation) => ({ value: operationTaskMap.get(operation) })),
-        chemicalManagement: proposalData.chemicalManagement.map((operation) => ({ value: chemicalMap.get(operation) })),
-        excludedTasks: excludedTasks.map((task) => ({ value: task.label })),
-    };
+    const proposalContent = buildProposalContent(proposalData);
 
     const templatePath = path.resolve(__dirname, "../templates", "template.docx");
     const content = fs.readFileSync(templatePath, "binary");
