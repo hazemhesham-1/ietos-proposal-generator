@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { CheckIcon } from "lucide-react";
 
 const Stepper = ({ currentStep, steps = [] }) => {
+    const { t } = useTranslation();
+
     if(!currentStep) return null;
 
     return (
-        <nav className="rounded-2xl relative p-10 overflow-hidden shadow-md min-h-screen">
+        <nav className="rounded-2xl hidden relative p-10 overflow-hidden shadow-md min-h-screen md:block">
             <img
                 src="/water-treatment-bg.png"
                 alt="Water Treatment Plant"
@@ -24,7 +27,7 @@ const Stepper = ({ currentStep, steps = [] }) => {
                             to={`/create-proposal/${step.url}`}
                             className={({ isActive }) => isActive ? "text-primary-400" : currentStep > i+1 ? "text-green-400" : "text-slate-100 hover:text-slate-300"}
                         >
-                            {step.name}
+                            {t(`common.steps.${step.name}`)}
                         </NavLink>
                     </li>
                 ))}

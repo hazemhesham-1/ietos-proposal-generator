@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { isValidJSON } from "../../lib/utils";
 import CustomFormField from "../../components/CustomFormField";
 import NavButtons from "../../components/NavButtons";
 
 const PricingDetails = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const { watch } = useFormContext();
     const [currencies, setCurrencies] = useState([]);
 
@@ -15,7 +18,7 @@ const PricingDetails = () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/currencies`);
 
-                const listOptions = response.data.map(({ name_en, name_ar, value }) => ({ label: name_en, value: `${value}-${name_ar}` }));
+                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name_en, value: JSON.stringify(option) }));
                 setCurrencies(listOptions);
             }
             catch(err) {
@@ -28,7 +31,7 @@ const PricingDetails = () => {
 
     const monthlyWorkValue = watch("workValue");
     const currencyValue = watch("currency");
-    const currency = currencyValue.split("-")[0];
+    const currency = isValidJSON(currencyValue) ? JSON.parse(currencyValue) : null;
 
     const monthlyTaxAmount = monthlyWorkValue * 0.14;
     const annualWorkValue = monthlyWorkValue * 12;
@@ -39,40 +42,40 @@ const PricingDetails = () => {
             <CustomFormField
                 type="number"
                 name="workValue"
-                label="Monthly Value of Works"
-                placeholder="e.g. 150,000"
-                description="Enter the monthly value of the proposed works, excluding tax"
+                label={t("forms.labels.monthlyWorks")}
+                placeholder={t("forms.placeholders.monthlyWorks")}
+                description={t("forms.descriptions.monthlyWorks")}
                 min={0}
             />
             <CustomFormField
                 type="select"
                 name="currency"
-                label="Currency"
-                placeholder="Select currency"
+                label={t("forms.labels.currency")}
+                placeholder={t("forms.placeholders.currency")}
                 options={currencies}
             />
             {monthlyWorkValue > 0 && (
                 <>
                     <div className="text-red-700 text-sm font-semibold">
                         <p>
-                            Monthly Value of Works: {monthlyWorkValue} {currency}
+                            {t("forms.labels.monthlyWorks")}: {monthlyWorkValue} {currency?.value}
                         </p>
                         <p>
-                            Monthly Tax Amount: {monthlyTaxAmount.toFixed(1)} {currency}
+                            {t("forms.labels.monthlyTaxAmount")}: {monthlyTaxAmount.toFixed(1)} {currency?.value}
                         </p>
                         <p>
-                            Monthly Total Including Tax: {Math.round(Number(monthlyWorkValue) + Number(monthlyTaxAmount))} {currency}
+                            {t("forms.labels.monthlyWithTax")}: {Math.round(Number(monthlyWorkValue) + Number(monthlyTaxAmount))} {currency?.value}
                         </p>
                     </div>
                     <div className="text-red-700 text-sm font-semibold">
                         <p>
-                            Annual Value of Works: {annualWorkValue} {currency}
+                            {t("forms.labels.annualWorks")}: {annualWorkValue} {currency?.value}
                         </p>
                         <p>
-                            Annual Tax Amount: {annualTaxAmount.toFixed(1)} {currency}
+                            {t("forms.labels.annualTaxAmount")}: {annualTaxAmount.toFixed(1)} {currency?.value}
                         </p>
                         <p>
-                            Annual Total Including Tax: {Math.round(Number(annualWorkValue) + Number(annualTaxAmount))} {currency}
+                            {t("forms.labels.annualWithTax")}: {Math.round(Number(annualWorkValue) + Number(annualTaxAmount))} {currency?.value}
                         </p>
                     </div>
                 </>
@@ -80,20 +83,20 @@ const PricingDetails = () => {
             <CustomFormField
                 type="number"
                 name="contractDuration"
-                label="Contract Duration (Months)"
-                placeholder="e.g., 12 months"
-                description="Specify the duration of the contract period."
+                label={t("forms.labels.contractDuration")}
+                placeholder={t("forms.placeholders.contractDuration")}
+                description={t("forms.descriptions.contractDuration")}
                 min={12}
             />
             <CustomFormField
                 type="number"
                 name="offerValidity"
-                label="Offer Validity (Days)"
-                placeholder="e.g., 30 days"
-                description="Specify how long the financial and technical offer remains valid from the date of submission."
+                label={t("forms.labels.offerValidity")}
+                placeholder={t("forms.placeholders.offerValidity")}
+                description={t("forms.descriptions.offerValidity")}
                 min={0}
             />
-            <NavButtons onBackTo={() => navigate("/create-proposal/work-scope")}/>
+            <NavButtons onBackTo={() => navigate(-1)}/>
         </>
     );
 };

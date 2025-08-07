@@ -17,7 +17,7 @@ const Home = () => {
                         Create accurate, consistent, and professional water treatment proposals in just a few steps.
                     </p>
                     <a
-                        href="/create-proposal/client-info"
+                        href="/create-proposal"
                         className="bg-primary-700 text-white rounded-lg inline-flex items-center px-5 py-2.5 text-sm font-medium text-center hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 transition-colors"
                     >
                         Get started

@@ -1,0 +1,79 @@
+{
+    "buttons": {
+        "generateProposal": "Generate Proposal",
+        "next": "Next",
+        "back": "Back"
+    },
+    "common": {
+        "businessScope": "Business scope",
+        "chemicalsManagement": "Chemicals Management",
+        "operationMaintenanceScope": "Operation & Maintenance Scope",
+        "operationsSchedule": "Operations Schedule",
+        "manpower": "Provision of Trained Workforce",
+        "replacements": "Replacement Requests",
+        "reports": "Reports & Periodic Follow-up",
+        "steps": {
+            "clientInfo": "Client & Project Info",
+            "waterDetails": "Source Water Details",
+            "businessScope": "Business Scope",
+            "financialOffer": "Financial Offer",
+            "generateDocument": "Generate Document"
+        }
+    },
+    "messages": {
+        "generateDocument": {
+            "title": "Finalize & Generate Proposal",
+            "description": "You’ve completed all the required steps. Now, generate a tailored technical proposal for your water treatment solution. Review the content after generation to ensure accuracy and alignment with client needs."
+        }
+    },
+    "forms": {
+        "labels": {
+            "contractDuration": "Contract Duration (Months)",
+            "currency": "Currency",
+            "companyName": "Company Name",
+            "contactPerson": "Contact Person",
+            "documentCode": "Document Code",
+            "issueDate": "Proposal Date",
+            "jobTitle": "Contact Person Job Title",
+            "projectGovernorate": "Project Governorate",
+            "projectLocation": "Project Location",
+            "proposalLanguage": "Proposal Language",
+            "flowRate": "Raw Water Flow Rate (m³/day)",
+            "monthlyWorks": "Monthly Value of Works",
+            "monthlyTaxAmount": "Monthly Tax Amount",
+            "monthlyWithTax": "Monthly Total Including Tax",
+            "annualWorks": "Annual Value of Works",
+            "annualTaxAmount": "Annual Tax Amount",
+            "annualWithTax": "Annual Total Including Tax",
+            "offerValidity": "Offer Validity (Days)",
+            "treatmentType": "Treatment Plant Type"
+        },
+        "placeholders": {
+            "contractDuration": "e.g., 12 months",
+            "currency": "Select currency",
+            "companyName": "e.g., Alexandria Water Company",
+            "contactPerson": "e.g., Eng. Mohamed Adel",
+            "documentCode": "e.g., I25OPM123",
+            "jobTitle": "e.g., Head of Engineering Department",
+            "projectGovernorate": "Select governorate",
+            "projectLocation": "e.g., 6th of October City, Giza",
+            "proposalLanguage": "Select language",
+            "flowRate": "e.g., 5000 m³/day",
+            "monthlyWorks": "e.g. 150,000",
+            "offerValidity": "e.g., 30 days",
+            "treatmentType": "Select plant type"
+        },
+        "descriptions": {
+            "contractDuration": "Specify the duration of the contract period.",
+            "companyName": "The name of the company receiving the proposal",
+            "contactPerson": "Enter the name of the engineering manager overseeing this project.",
+            "documentCode": "A unique identifier for the document.",
+            "jobTitle": "Enter the official job title of the engineering manager responsible for the project.",
+            "projectGovernorate": "Select the governorate where the project is located.",
+            "projectLocation": "Enter the project’s geographical location in Egypt.",
+            "flowRate": "Specify the daily treatment capacity of the plant.",
+            "monthlyWorks": "Enter the monthly value of the proposed works, excluding tax",
+            "offerValidity": "Specify how long the financial and technical offer remains valid from the date of submission."
+        }
+    }
+}

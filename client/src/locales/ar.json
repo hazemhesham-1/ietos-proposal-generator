@@ -1,0 +1,79 @@
+{
+    "buttons": {
+        "generateProposal": "إنشاء العرض الفني",
+        "next": "التالي",
+        "back": "رجوع"
+    },
+    "common": {
+        "businessScope": "نطاق العمل",
+        "chemicalsManagement": "إدارة المواد الكيميائية",
+        "operationMaintenanceScope": "نطاق أعمال التشغيل والصيانة",
+        "operationsSchedule": "جدول التشغيل",
+        "manpower": "توفير القوى العاملة والمعدات",
+        "replacements": "طلبات الاستبدال",
+        "reports": "التقارير والمتابعة الدورية",
+        "steps": {
+            "clientInfo": "معلومات العميل والمشروع",
+            "waterDetails": "تفاصيل مصدر المياه",
+            "businessScope": "نطاق العمل",
+            "financialOffer": "العرض المالي",
+            "generateDocument": "إنشاء المستند"
+        }
+    },
+    "messages": {
+        "generateDocument": {
+            "title": "إنهاء وإنشاء العرض الفني",
+            "description": "لقد أكملت جميع الخطوات المطلوبة. الآن، يمكنك إنشاء عرض فني مخصص لحل معالجة المياه الخاص بك. يرجى مراجعة المحتوى بعد الإنشاء للتأكد من دقته وتوافقه مع احتياجات العميل."
+        }
+    },
+    "forms": {
+        "labels": {
+            "contractDuration": "مدة العقد (بالأشهر)",
+            "currency": "العملة",
+            "companyName": "اسم الشركة",
+            "contactPerson": "المسؤول عن المشروع",
+            "documentCode": "كود المستند",
+            "issueDate": "تاريخ العرض",
+            "jobTitle": "المسمى الوظيفي",
+            "projectGovernorate": "محافظة المشروع",
+            "projectLocation": "موقع المشروع",
+            "proposalLanguage": "لغة العرض",
+            "flowRate": "معدل تدفق المياه (م³/يوم)",
+            "monthlyWorks": "القيمة الشهرية للأعمال",
+            "monthlyTaxAmount": "قيمة الضريبة الشهرية",
+            "monthlyWithTax": "الإجمالي الشهري شامل الضريبة",
+            "annualWorks": "القيمة السنوية للأعمال",
+            "annualTaxAmount": "قيمة الضريبة السنوية",
+            "annualWithTax": "الإجمالي السنوي شامل الضريبة",
+            "offerValidity": "صلاحية العرض (بالأيام)",
+            "treatmentType": "نوع محطة المعالجة"
+        },
+        "placeholders": {
+            "contractDuration": "مثال: 12 شهراً",
+            "currency": "اختر العملة",
+            "companyName": "مثال: شركة مياه الإسكندرية",
+            "contactPerson": "مثال: م. محمد عادل",
+            "documentCode": "مثال: I25OPM123",
+            "jobTitle": "مثال: مدير الإدارة الهندسية",
+            "projectGovernorate": "اختر المحافظة",
+            "projectLocation": "مثال: مدينة 6 أكتوبر، الجيزة",
+            "proposalLanguage": "اختر اللغة",
+            "flowRate": "مثال: 5000 م³/يوم",
+            "monthlyWorks": "مثال: 150,0000",
+            "offerValidity": "مثال: 30 يوماً",
+            "treatmentType": "اختر نوع المحطة"
+        },
+        "descriptions": {
+            "contractDuration": "حدد مدة فترة العقد.",
+            "companyName": "اسم الشركة المستلمة للعرض",
+            "contactPerson": "أدخل اسم المهندس المسؤول عن إدارة هذا المشروع",
+            "documentCode": "معرّف فريد للمستند.",
+            "jobTitle": "أدخل المسمى الوظيفي الرسمي للمهندس المسؤول عن المشروع",
+            "projectGovernorate": "اختر المحافظة التي يقع فيها المشروع",
+            "projectLocation": "أدخل الموقع الجغرافي للمشروع داخل مصر",
+            "flowRate": "حدد سعة المعالجة اليومية للمحطة.",
+            "monthlyWorks": "أدخل القيمة الشهرية للأعمال المقترحة، بدون الضرائب",
+            "offerValidity": "حدد مدة صلاحية العرض المالي والفني من تاريخ التقديم."
+        }
+    }
+}

@@ -2,119 +2,273 @@
     "tasks": [
         {
             "id": "task-01",
-            "label": "توفير العمالة اللازمة المدربة والمؤهلة اللازمة لتشغيل محطة معالجة سوائل الصرف الصحي بخبرة سابقة في تشغيل المحطات ويتم اعتمادها من الطرف الأول"
+            "label": {
+                "ar": "توفير العمالة اللازمة المدربة والمؤهلة اللازمة لتشغيل محطة معالجة سوائل الصرف الصحي بخبرة سابقة في تشغيل المحطات ويتم اعتمادها من الطرف الأول",
+                "en": "Provision of the necessary trained and qualified personnel to operate the wastewater treatment plant, with prior experience in plant operation, and approved by the first party."
+            }
         },
         {
             "id": "task-02",
-            "label": "تواجد العمالة لمدة 24 ساعة داخل المحطة"
+            "label": {
+                "ar": "تواجد العمالة لمدة 24 ساعة داخل المحطة",
+                "en": "Personnel presence at the plant 24 hours a day."
+            }
         },
         {
             "id": "task-03",
-            "label": "زيارة دورية شهرية لمسئولي إدارة التشغيل والصيانة وتقديم تقرير شهري للطرف الأول بحالة المحطة"
+            "label": {
+                "ar": "زيارة دورية شهرية لمسئولي إدارة التشغيل والصيانة وتقديم تقرير شهري للطرف الأول بحالة المحطة",
+                "en": "Monthly periodic visit by the operation and maintenance management personnel, with a monthly report submitted to the first party on the plant's condition."
+            }
         },
         {
             "id": "task-04",
-            "label": "توريد قطع الغيار المستهلكة للمعدات (زيوت وشحوم)"
+            "label": {
+                "ar": "توريد قطع الغيار المستهلكة للمعدات (زيوت وشحوم)",
+                "en": "Supply of consumable spare parts for equipment (oils and greases)."
+            }
         },
         {
             "id": "task-05",
-            "label": "عمل تحليل ربع سنوي عشوائي على انتاج المحطة يتم اخذ العينة تحت اشراف الطرف الأول"
+            "label": {
+                "ar": "عمل تحليل ربع سنوي عشوائي على انتاج المحطة يتم اخذ العينة تحت اشراف الطرف الأول",
+                "en": "Conducting a random quarterly analysis of the plant's output, with the sample taken under the supervision of the first party."
+            }
         },
         {
             "id": "task-06",
-            "label": "جميع النقاط التى لم يتم ذكرها في عرضنا الفني"
+            "label": {
+                "ar": "جميع النقاط التى لم يتم ذكرها في عرضنا الفني",
+                "en": "All items not mentioned in our technical proposal."
+            }
         },
         {
             "id": "task-07",
-            "label": "توفير مصدر للتيار الكهربائي موصل الي لوحة التحكم الرئيسية وهذا المصدر يكون كافي للتشغيل المستمر للمحطة ومطابق للمواصفات المطلوبة للمحطة"
+            "label": {
+                "ar": "توفير مصدر للتيار الكهربائي موصل الي لوحة التحكم الرئيسية وهذا المصدر يكون كافي للتشغيل المستمر للمحطة ومطابق للمواصفات المطلوبة للمحطة",
+                "en": "Provision of a power source connected to the main control panel, sufficient for the continuous operation of the plant and compliant with the required specifications."
+            }
         },
         {
             "id": "task-08",
-            "label": "توفير مياه الصرف الصحي بالكميات والمواصفات الموضحة بالتصميم للمحطة"
+            "label": {
+                "ar": "توفير مياه الصرف الصحي بالكميات والمواصفات الموضحة بالتصميم للمحطة",
+                "en": "Provision of wastewater in the quantities and specifications indicated in the plant design."
+            }
         },
         {
             "id": "task-09",
-            "label": "توفير مصدر مياه عذبة لزوم أعمال الاختبار"
+            "label": {
+                "ar": "توفير مصدر مياه عذبة لزوم أعمال الاختبار",
+                "en": "Provision of a fresh water source for testing purposes."
+            }
         },
         {
             "id": "task-10",
-            "label": "تدبير مكان امن ومناسب لتخزين الكيماويات"
+            "label": {
+                "ar": "تدبير مكان امن ومناسب لتخزين الكيماويات",
+                "en": "Provision of a safe and suitable location for chemical storage."
+            }
         },
         {
             "id": "task-11",
-            "label": "توفير وسيلة أمنة للتخلص من الحمأة الزائدة وتطهير الخزانات"
+            "label": {
+                "ar": "توفير وسيلة أمنة للتخلص من الحمأة الزائدة وتطهير الخزانات",
+                "en": "Provision of a safe method for disposing of excess sludge and disinfecting the tanks."
+            }
         },
         {
             "id": "task-12",
-            "label": "توريد قطع الغيار الخاصة بأعمال الصيانة بالمحطة, وفي حال طلب سيادتكم توفيرها من خلال شركتنا يتم توفيرها بعد اعتماد السعر بفاتورة منفصلة"
+            "label": {
+                "ar": "توريد قطع الغيار الخاصة بأعمال الصيانة بالمحطة, وفي حال طلب سيادتكم توفيرها من خلال شركتنا يتم توفيرها بعد اعتماد السعر بفاتورة منفصلة",
+                "en": "Supply of spare parts for plant maintenance. If you request to procure them through our company, they will be provided after price approval with a separate invoice."
+            }
         },
         {
             "id": "task-13",
-            "label": "لف المواتير في حاله الاعطال النمطيه"
+            "label": {
+                "ar": "لف المواتير في حاله الاعطال النمطيه",
+                "en": "Rewinding motors in case of typical faults."
+            }
         },
         {
             "id": "task-14",
-            "label": "توفير الإقامة والاعاشة الخاصة بالعمالة اللازمة للتشغيل وفريق الصيانة طول فترة التعاقد"
+            "label": {
+                "ar": "توفير الإقامة والاعاشة الخاصة بالعمالة اللازمة للتشغيل وفريق الصيانة طول فترة التعاقد",
+                "en": "Provision of accommodation and meals for the necessary operational staff and maintenance team throughout the contract period."
+            }
         },
         {
             "id": "task-15",
-            "label": "توفير الخامات المستهلكة مثل الوسط الترشيحى وموزعات الهواء وقطع الغيار والمعدات التي تتلف نتيجة العمر الافتراضى او تجاوز عدد مرات الصيانة طبقا لكتيب تعليمات التشغيل والصيانة لكل معدة"
+            "label": {
+                "ar": "توفير الخامات المستهلكة مثل الوسط الترشيحى وموزعات الهواء وقطع الغيار والمعدات التي تتلف نتيجة العمر الافتراضى او تجاوز عدد مرات الصيانة طبقا لكتيب تعليمات التشغيل والصيانة لكل معدة",
+                "en": "Provision of consumable materials such as filter media, air diffusers, spare parts, and equipment that become damaged due to their expected lifespan or exceeding the number of maintenance cycles, according to the operation and maintenance manual for each device."
+            }
         }
     ],
-    "schedules": {
-        "daily": [
-            {
-                "id": "daily-01",
-                "label": "فحص وتشغيل وحدات المصافي ، والتهويه و الفلاتر .....الخ"
-            },
-            {
-                "id": "daily-02",
-                "label": "قياس المتغيرات التشغيلية"
-            },
-            {
-                "id": "daily-03",
-                "label": "تسجيل الملاحظات والأعطال"
-            }
-        ],
-        "weekly": [
-            {
-                "id": "weekly-01",
-                "label": "فحص الصمامات والمحابس الرئيسية"
-            }
-        ],
-        "monthly": [
-            {
-                "id": "monthly-01",
-                "label": "مراجعة أداء المعدات مقارنة بالمعدلات التصميمية"
-            },
-            {
-                "id": "monthly-02",
-                "label": "إصدار تقرير تشغيلي  يتضمن الأداء، الصعوبات، والمقترحات"
-            }
-        ]
-    },
-    "periods": [
+    "manpower": [
         {
-            "label": "الجداول اليومية",
-            "value": "daily"
+            "id": "item-01",
+            "label": {
+                "ar": "توفير معدات التنظيف",
+                "en": "Supply cleaning equipment"
+            }
         },
         {
-            "label": "الجداول الأسبوعية",
-            "value": "weekly"
+            "id": "item-02",
+            "label": {
+                "ar": "توفير العمال لتنفيذ المهام اليومية وضمان نظافة المسابح والنوافير",
+                "en": "Provision of Operators to manage daily tasks and ensure cleanliness of the pools and fountains."
+            }
         },
         {
-            "label": "الجداول الشهرية",
-            "value": "monthly"
+            "id": "item-03",
+            "label": {
+                "ar": "توفير المشرفين (نوبة نهارية / ليلية) لضمان جودة التنفيذ والإشراف على العمليات",
+                "en": "Provision of Supervisors (Day/Night shift) to ensure quality execution and oversee operations."
+            }
+        },
+        {
+            "id": "item-04",
+            "label": {
+                "ar": "توفير الفنيين (نوبة نهارية / ليلية) لضمان جودة التنفيذ والإشراف على العمليات",
+                "en": "Provision of Technicians (Day/Night shift) to ensure quality execution and oversee operations."
+            }
+        },
+        {
+            "id": "item-05",
+            "label": {
+                "ar": "توفير مهندس غير مقيم لإجراء المتابعة الفنية الدورية ومراجعة أداء النظام",
+                "en": "Provision of Non-Resident Engineer to conduct periodic technical follow-ups and review system performance."
+            }
+        }
+    ],
+    "schedules": [
+        {
+            "label": {
+                "ar": "الجداول اليومية",
+                "en": "Daily reports"
+            },
+            "value": "daily",
+            "list": [
+                {
+                    "id": "daily-01",
+                    "label": {
+                        "ar": "فحص وتشغيل وحدات المصافي ، والتهويه و الفلاتر .....الخ",
+                        "en": "Inspection and operation of screens, ventilation units, filters, etc."
+                    }
+                },
+                {
+                    "id": "daily-02",
+                    "label": {
+                        "ar": "قياس المتغيرات التشغيلية",
+                        "en": "Measuring operational variables."
+                    }
+                },
+                {
+                    "id": "daily-03",
+                    "label": {
+                        "ar": "تسجيل الملاحظات والأعطال",
+                        "en": "Recording observations and faults."
+                    }
+                }
+            ]
+        },
+        {
+            "label": {
+                "ar": "الجداول الأسبوعية",
+                "en": "Weekly reports"
+            },
+            "value": "weekly",
+            "list": [
+                {
+                    "id": "weekly-01",
+                    "label": {
+                        "ar": "فحص الصمامات والمحابس الرئيسية",
+                        "en": "Inspection of main valves and gate valves."
+                    }
+                }
+            ]
+        },
+        {
+            "label": {
+                "ar": "الجداول الشهرية",
+                "en": "Monthly reports"
+            },
+            "value": "monthly",
+            "list": [
+                {
+                    "id": "monthly-01",
+                    "label": {
+                        "ar": "مراجعة أداء المعدات مقارنة بالمعدلات التصميمية",
+                        "en": "Reviewing equipment performance compared to design standards."
+                    }
+                },
+                {
+                    "id": "monthly-02",
+                    "label": {
+                        "ar": "إصدار تقرير تشغيلي  يتضمن الأداء، الصعوبات، والمقترحات",
+                        "en": "Issuing an operational report including performance, challenges, and recommendations."
+                    }
+                }
+            ]
+        }
+    ],
+    "replacements": [
+        {
+            "label": {
+                "ar": "قائمة قطع الغيار السنوية",
+                "en": "Annual Spare Parts List"
+            },
+            "value": "parts",
+            "list": [
+                 {
+                    "id": "parts-01",
+                    "label": {
+                        "ar": "قائمة جدول الأعطال لقطع الغيار السنوية",
+                        "en": "Break-Down Schedule list for Annual Spare parts"
+                    }
+                }
+            ]
+        },
+        {
+            "label": {
+                "ar": "قد تكون هناك حاجة لاستبدال إضافي للعناصر أو الكميات",
+                "en": "Extra replacement for items or Quantities may be required"
+            },
+            "value": "process",
+            "list": [
+                {
+                    "id": "process-01",
+                    "label": {
+                        "ar": "تقييم احتياجات الاستبدال",
+                        "en": "Assessment of Replacement Needs"
+                    }
+                },
+                {
+                    "id": "process-02",
+                    "label": {
+                        "ar": "عرض سعر للاستبدال",
+                        "en": "Quotation for Replacement"
+                    }
+                }
+            ]
         }
     ],
     "chemicals": [
         {
             "id": "chemicals-01",
-            "label": "يتم ضبط الجرعات استنادًا إلى نتائج التحاليل اليومية (مثل الكلور)"
+            "label": {
+                "ar": "يتم ضبط الجرعات استنادًا إلى نتائج التحاليل اليومية (مثل الكلور)",
+                "en": "Dosages are adjusted based on daily analysis results (e.g., chlorine)."
+            }
         },
         {
             "id": "chemicals-02",
-            "label": "يجب تسجيل كميات الاستهلاك والرصيد المتبقي بشكل دوري"
+            "label": {
+                "ar": "يجب تسجيل كميات الاستهلاك والرصيد المتبقي بشكل دوري",
+                "en": "Consumption quantities and remaining balances must be recorded periodically."
+            }
         }
     ]
 }

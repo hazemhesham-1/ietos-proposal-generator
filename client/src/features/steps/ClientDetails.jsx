@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ArrowRightIcon } from "lucide-react";
-import { Button } from "../../components/ui/Button";
 import CustomFormField from "../../components/CustomFormField";
+import NavButtons from "../../components/NavButtons";
+import { useTranslation } from "react-i18next";
 
 const ClientDetails = () => {
+    const { t, i18n } = useTranslation();
     const [governorates, setGovernorates] = useState([]);
+
+    const languages = [
+        { label: "Arabic", value: "ar" },
+        { label: "English", value: "en" },
+    ];
 
     useEffect(() => {
         async function getGovernorates() {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/governorates`);
-
-                const listOptions = response.data.map(({ name_en, name_ar }) => ({ label: name_en, value: name_ar }));
+                
+                const listOptions = response.data.map((option) => ({ label: option[`name_${i18n.language}`], value: JSON.stringify(option) }));
                 setGovernorates(listOptions);
             }
             catch(err) {
@@ -27,51 +33,55 @@ const ClientDetails = () => {
         <>
             <CustomFormField
                 name="id"
-                label="Document Code"
-                placeholder="e.g., I25OPM123"
-                description="A unique identifier for the document."
+                label={t("forms.labels.documentCode")}
+                placeholder={t("forms.placeholders.documentCode")}
+                description={t("forms.descriptions.documentCode")}
             />
             <CustomFormField
                 name="companyName"
-                label="Company Name"
-                placeholder="e.g., Alexandria Water Company"
-                description="The name of the company receiving the proposal"
+                label={t("forms.labels.companyName")}
+                placeholder={t("forms.placeholders.companyName")}
+                description={t("forms.descriptions.companyName")}
             />
             <CustomFormField
                 name="projectLocation"
-                label="Project Location"
-                placeholder="e.g., 6th of October City, Giza"
-                description="Enter the project’s geographical location in Egypt."
+                label={t("forms.labels.projectLocation")}
+                placeholder={t("forms.placeholders.projectLocation")}
+                description={t("forms.descriptions.projectLocation")}
             />
             <CustomFormField
                 type="select"
                 name="projectGovernorate"
-                label="Project Governorate"
-                placeholder="Select governorate"
+                label={t("forms.labels.projectGovernorate")}
+                placeholder={t("forms.placeholders.projectGovernorate")}
                 options={governorates}
-                description="Select the governorate where the project is located."
+                description={t("forms.descriptions.projectGovernorate")}
             />
             <CustomFormField
                 name="contactPerson"
-                label="Contact Person"
-                placeholder="e.g., Eng. Mohamed Adel"
-                description="Enter the name of the engineering manager overseeing this project."
+                label={t("forms.labels.contactPerson")}
+                placeholder={t("forms.placeholders.contactPerson")}
+                description={t("forms.descriptions.contactPerson")}
             />
             <CustomFormField
                 name="jobTitle"
-                label="Contact Person Job Title"
-                placeholder="e.g., Head of Engineering Department"
-                description="Enter the official job title of the engineering manager responsible for the project."
+                label={t("forms.labels.jobTitle")}
+                placeholder={t("forms.placeholders.jobTitle")}
+                description={t("forms.descriptions.jobTitle")}
             />
             <CustomFormField
                 type="date"
                 name="issueDate"
-                label="Proposal Date"
+                label={t("forms.labels.issueDate")}
             />
-            <Button size="lg" className="w-1/2 mt-5 mx-auto">
-                Next
-                <ArrowRightIcon/>
-            </Button>
+            <CustomFormField
+                type="select"
+                name="language"
+                label={t("forms.labels.proposalLanguage")}
+                placeholder={t("forms.placeholders.proposalLanguage")}
+                options={languages}
+            />
+            <NavButtons hideBack={true}/>
         </>
     );
 };
