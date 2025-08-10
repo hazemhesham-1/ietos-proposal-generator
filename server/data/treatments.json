@@ -1,19 +1,37 @@
 {
     "types": [
         {
-            "name_en": "Wastewater Treatment Plant (WWTP)",
-            "name_ar": "محطة معالجة مياه الصرف الصحي",
+            "name": {
+                "ar": "محطة معالجة مياه الصرف الصحي",
+                "en": "Wastewater Treatment Plant"
+            },
+            "treatment": {
+                "ar": "معالجة مياه الصرف الصحي",
+                "en": "Wastewater Treatment"
+            },
             "short": "WWTP"
         },
         {
-            "name_en": "Drinking Water Treatment Plant (DWTP)",
-            "name_ar": "محطة معالجة مياه شرب",
+            "name": {
+                "ar": "محطة معالجة مياه شرب",
+                "en": "Drinking Water Treatment Plant"
+            },
+            "treatment": {
+                "ar": "معالجة مياه شرب",
+                "en": "Drinking Water Treatment"
+            },
             "short": "DWTP"
         },
         {
-            "name_en": "Industrial Water Treatment Plant (IWTP)",
-            "name_ar": "محطة معالجة مياه صناعية",
-            "short": "IWTP"
+            "name": {
+                "ar": "محطة معالجة مياه الصرف الصناعي",
+                "en": "Industrial Wastewater Treatment Plant"
+            },
+            "treatment": {
+                "ar": "معالجة مياه الصرف الصناعي",
+                "en": "Industrial Wastewater Treatment"
+            },
+            "short": "IWWTP"
         }
     ]
 }

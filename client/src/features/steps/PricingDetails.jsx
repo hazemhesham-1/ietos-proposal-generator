@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { isValidJSON } from "../../lib/utils";
-import CustomFormField from "../../components/CustomFormField";
-import NavButtons from "../../components/NavButtons";
+import { isValidJSON } from "@/lib/utils";
+import CustomFormField from "@/components/CustomFormField";
+import NavButtons from "@/components/NavButtons";
 
 const PricingDetails = () => {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ const PricingDetails = () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/currencies`);
 
-                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name_en, value: JSON.stringify(option) }));
+                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name.en, value: JSON.stringify(option) }));
                 setCurrencies(listOptions);
             }
             catch(err) {

@@ -1,7 +1,9 @@
 {
     "buttons": {
         "generateProposal": "Generate Proposal",
+        "addEquipment": "Add Equipment",
         "next": "Next",
+        "previous": "Previous",
         "back": "Back"
     },
     "common": {
@@ -12,18 +14,92 @@
         "manpower": "Provision of Trained Workforce",
         "replacements": "Replacement Requests",
         "reports": "Reports & Periodic Follow-up",
+        "totalPrice": "Total Price",
+        "totalPriceWithFees": "Total Price (VAT {{percent}}%)",
         "steps": {
             "clientInfo": "Client & Project Info",
             "waterDetails": "Source Water Details",
             "businessScope": "Business Scope",
             "financialOffer": "Financial Offer",
             "generateDocument": "Generate Document"
+        },
+        "table": {
+            "equipmentList": "List of Equipment",
+            "equipmentName": "Equipment Name"
         }
     },
     "messages": {
         "generateDocument": {
             "title": "Finalize & Generate Proposal",
             "description": "You’ve completed all the required steps. Now, generate a tailored technical proposal for your water treatment solution. Review the content after generation to ensure accuracy and alignment with client needs."
+        }
+    },
+    "dialog": {
+        "titles": {
+            "equipment": "Equipment Selection Wizard"
+        },
+        "labels": {
+            "quantity": "Quantity",
+            "unit": "Quantity Unit",
+            "type": "Equipment Type",
+            "price": "Unit Price",
+            "flow": "Flow Rate (m³/hr)",
+            "head": "Head (m)",
+            "size": "Size (inch)",
+            "casingMaterial": "Casing Material",
+            "shaftMaterial": "Shaft Material",
+            "impellerMaterial": "Impeller Material",
+            "valves": "Valves",
+            "protection": "Protection Rating",
+            "manufacturer": "Manufacturer",
+            "origin": "Country of Origin",
+            "pressure": "Pressure (bar)",
+            "temperature": "Operating Temperature",
+            "poreSize": "Pore Size (µm)",
+            "model": "Model Number",
+            "capacity": "Capacity (L/hr)"
+        },
+        "placeholders": {
+            "quantity": "e.g., 5",
+            "unit": "Select the appropriate unit",
+            "type": "e.g. Submersible Pump or Tube Diffuser",
+            "price": "e.g., 1250.00",
+            "flow": "e.g., 14",
+            "head": "e.g., 11.8",
+            "size": "e.g., 2.5 inch",
+            "casingMaterial": "e.g. Stainless Steel",
+            "shaftMaterial": "e.g. Stainless Steel",
+            "impellerMaterial": "e.g. Stainless Steel",
+            "valves": "e.g. Isolating, Non-return",
+            "protection": "e.g. IP68",
+            "manufacturer": "e.g. Grundfos",
+            "origin": "e.g. Denmark",
+            "pressure": "e.g. 6",
+            "temperature": "e.g. 45°C",
+            "poreSize": "e.g. 0.01",
+            "model": "e.g. CR 10",
+            "capacity": "e.g. 500 L/hr"
+        },
+        "descriptions": {
+            "type": "Enter the equipment type if it is not listed in the previous options.",
+            "price": "Enter the price for a single unit of the equipment, excluding taxes or additional fees.",
+            "casingMaterial": "Indicate the material used for the equipment's outer casing.",
+            "shaftMaterial": "Enter the material used for the internal shaft.",
+            "impellerMaterial": "Specify the material of the impeller.",
+            "valves": "Mention the types of valves associated with this equipment.",
+            "protection": "Enter the ingress protection (IP) rating of the equipment.",
+            "manufacturer": "Enter the name of the company that manufactured the equipment.",
+            "origin": "State the country where the equipment was made.",
+            "pressure": "Specify the maximum working pressure in bars.",
+            "temperature": "Enter the recommended operating temperature.",
+            "poreSize": "Enter the pore size of the membrane in microns.",
+            "model": "Enter the model number provided by the manufacturer.",
+            "capacity": "Enter the equipment’s processing capacity."
+        },
+        "steps": {
+            "equipmentCategory": "Step {{step}}: Select the category of the equipment",
+            "equipmentDetails": "Step {{step}}: Fill the details of the equipment",
+            "equipmentSpecs": "Step {{step}}: Enter the mechanical specification of the equipment"
         }
     },
     "forms": {
@@ -35,6 +111,7 @@
             "documentCode": "Document Code",
             "issueDate": "Proposal Date",
             "jobTitle": "Contact Person Job Title",
+            "projectSubject": "Project Subject",
             "projectGovernorate": "Project Governorate",
             "projectLocation": "Project Location",
             "proposalLanguage": "Proposal Language",
@@ -46,7 +123,11 @@
             "annualTaxAmount": "Annual Tax Amount",
             "annualWithTax": "Annual Total Including Tax",
             "offerValidity": "Offer Validity (Days)",
-            "treatmentType": "Treatment Plant Type"
+            "treatmentType": "Treatment Plant Type",
+            "workScope": "Scope of Work",
+            "actionType": "Action Type",
+            "equipment": "{{category}} Type",
+            "equipmentLocation": "Location of the Equipment"
         },
         "placeholders": {
             "contractDuration": "e.g., 12 months",
@@ -55,13 +136,18 @@
             "contactPerson": "e.g., Eng. Mohamed Adel",
             "documentCode": "e.g., I25OPM123",
             "jobTitle": "e.g., Head of Engineering Department",
+            "projectSubject": "e.g., Supply and installation of a centrifugal pump",
             "projectGovernorate": "Select governorate",
             "projectLocation": "e.g., 6th of October City, Giza",
             "proposalLanguage": "Select language",
             "flowRate": "e.g., 5000 m³/day",
             "monthlyWorks": "e.g. 150,000",
             "offerValidity": "e.g., 30 days",
-            "treatmentType": "Select plant type"
+            "treatmentType": "Select plant type",
+            "workScope": "e.g., Install centrifugal pump and connect electrical panel",
+            "actionType": "Select the action to perform",
+            "equipment": "Select {{category}} type",
+            "equipmentLocation": "e.g., at the balance tank or Unit 03 Room A"
         },
         "descriptions": {
             "contractDuration": "Specify the duration of the contract period.",
@@ -69,11 +155,16 @@
             "contactPerson": "Enter the name of the engineering manager overseeing this project.",
             "documentCode": "A unique identifier for the document.",
             "jobTitle": "Enter the official job title of the engineering manager responsible for the project.",
+            "projectSubject": "Enter the main topic or title of the proposal",
             "projectGovernorate": "Select the governorate where the project is located.",
             "projectLocation": "Enter the project’s geographical location in Egypt.",
             "flowRate": "Specify the daily treatment capacity of the plant.",
             "monthlyWorks": "Enter the monthly value of the proposed works, excluding tax",
-            "offerValidity": "Specify how long the financial and technical offer remains valid from the date of submission."
+            "offerValidity": "Specify how long the financial and technical offer remains valid from the date of submission.",
+            "workScope": "Add or remove installation tasks as part of the scope of work",
+            "actionType": "Choose the purpose of this operation (e.g., install or replace the equipment)",
+            "equipment": "Choose the type of {{category}} used in the system",
+            "equipmentLocation": "Specify the exact physical location of the equipment within the plant"
         }
     }
 }

@@ -14,6 +14,13 @@ const Stepper = ({ currentStep, steps = [] }) => {
                 alt="Water Treatment Plant"
                 className="absolute inset-0 object-cover size-full"
             />
+            <div className="relative w-full mb-32 opacity-90">
+                <img
+                    src="/logo-light.png"
+                    alt="IETOS Company Logo"
+                    className="absolute inset-0 object-cover"
+                />
+            </div>
             <ol className="border-s-2 border-slate-200 relative">
                 {steps.map((step, i) => (
                     <li

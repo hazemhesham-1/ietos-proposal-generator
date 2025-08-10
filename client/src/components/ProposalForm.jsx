@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { DollarSignIcon, DropletsIcon, FileTextIcon, IdCardIcon, SettingsIcon } from "lucide-react";
 import { Form } from "./ui/Form";
-import Stepper from "../features/steps/Stepper";
+import Stepper from "@/features/steps/Stepper";
+import EquipmentForm from "@/features/equipments/EquipmentForm";
 
 const navLinks = {
     "om-offer": [
@@ -34,6 +35,45 @@ const navLinks = {
             name: "generateDocument",
             icon: <FileTextIcon/>
         },
+    ],
+    "rehab": [
+        {
+            url: "rehab/client-info",
+            name: "clientInfo",
+            icon: <IdCardIcon/>
+        },
+        {
+            url: "rehab/water-details",
+            name: "waterDetails",
+            icon: <DropletsIcon/>
+        },
+        {
+            url: "rehab/work-scope",
+            name: "businessScope",
+            icon: <SettingsIcon/>
+        },
+        {
+            url: "rehab/generate-doc",
+            name: "generateDocument",
+            icon: <FileTextIcon/>
+        },
+    ],
+    "others": [
+        {
+            url: "others/client-info",
+            name: "clientInfo",
+            icon: <IdCardIcon/>
+        },
+        {
+            url: "others/work-scope",
+            name: "businessScope",
+            icon: <SettingsIcon/>
+        },
+        {
+            url: "others/generate-doc",
+            name: "generateDocument",
+            icon: <FileTextIcon/>
+        },
     ]
 };
 
@@ -41,11 +81,12 @@ const defaultValues = {
     language: "en",
     id: "",
     companyName: "",
+    projectSubject: "",
     projectLocation: "",
     projectGovernorate: "",
     contactPerson: "",
     jobTitle: "",
-    issueDate: "2025-01-01",
+    issueDate: "",
     plantType: "",
     flowrate: 0,
     operationScope: [],
@@ -54,28 +95,32 @@ const defaultValues = {
     chemicalManagement: [],
     replacements: [],
     reports: [],
+    equipments: [],
     workValue: 0,
-    currency: "{\"name_en\":\"Egyptian Pound (EGP)\",\"name_ar\":\"جنيهاً مصرياً\",\"value\":\"EGP\"}",
+    currency: "{\"value\":\"EGP\",\"name\":{\"en\":\"Egyptian Pound (EGP)\",\"ar\":\"جنيهاً مصرياً\"}}",
     contractDuration: 12,
     offerValidity: 30,
 };
 
 const ProposalForm = ({ children }) => {
+    const navigate = useNavigate();
     const location = useLocation();
     const { type: proposalType } = useParams();
-    const { i18n } = useTranslation();
-    const navigate = useNavigate();
-    const [currentStep, setCurrentStep] = useState(null);
+    const { t, i18n } = useTranslation();
+
+    const [currentStep, setCurrentStep] = useState(0);
+    const numSteps = proposalType ? navLinks[proposalType].length : 0;
 
     const documentCodes = {
         "om-offer": "OPM",
         "rehab": "REH",
+        "others": "OTH",
     };
     const yearSuffix = new Date().getFullYear().toString().slice(-2);
     const documentCode = `I${yearSuffix}${documentCodes[proposalType]}`;
 
     const methods = useForm({ defaultValues: { ...defaultValues, id: documentCode } });
-    
+
     useEffect(() => {
         const { pathname } = location;
         if(!pathname.includes("/create-proposal")) return;
@@ -92,22 +137,24 @@ const ProposalForm = ({ children }) => {
             i18n.changeLanguage(data.language);
         }
 
-        if(currentStep < navLinks[proposalType].length) {
+        if(currentStep < numSteps) {
             navigate(`/create-proposal/${navLinks[proposalType][currentStep].url}`);
         }
-        else if(currentStep === navLinks[proposalType].length) {
+        else if(currentStep === numSteps) {
             const { language, issueDate, plantType } = data;
 
-            const treatmentPlant = JSON.parse(plantType);
-            const treatmentType = treatmentPlant[`name_${language}`].split(" ").slice(1).join(" ");
+            const localeDateString = new Date(issueDate).toLocaleString(language === "ar" ? "ar-EG" : "en-US", { month: "long", year: "numeric" });
+            const parsedPlantType = JSON.parse(plantType);
 
-            const additionalData = {
-                issueDateString: new Date(issueDate).toLocaleString(language === "ar" ? "ar-EG" : "en-US", { month: "long", year: "numeric" }),
-                plantTypeShort: treatmentPlant.short,
-                treatmentType,
+            const formData = {
+                ...data,
+                documentCode: documentCodes[proposalType],
+                issueDateString: localeDateString,
+                plantTypeShort: parsedPlantType.short,
+                treatmentType: parsedPlantType.treatment[language],
             };
             
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/proposals/generate`, { ...data, ...additionalData }, { responseType: "blob" });
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/proposals/generate`, formData, { responseType: "blob" });
 
             const blob = new Blob([response.data], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
             const link = document.createElement("a");
@@ -118,17 +165,25 @@ const ProposalForm = ({ children }) => {
     }
 
     return (
-        <Form {...methods}>
-            <form
-                onSubmit={methods.handleSubmit(onSubmit)}
-                className="flex justify-between gap-20 w-full"
-            >
-                <Stepper currentStep={currentStep} steps={navLinks?.[proposalType]}/>
-                <div className="flex-1 flex flex-col gap-8 mt-12">
-                    {children}
-                </div>
-            </form>
-        </Form>
+        <>
+            <Form {...methods}>
+                <form
+                    onSubmit={methods.handleSubmit(onSubmit)}
+                    className="flex justify-between gap-20 w-full"
+                >
+                    <Stepper currentStep={currentStep} steps={navLinks[proposalType]}/>
+                    <div className="flex-1 flex flex-col gap-8 mt-12">
+                        {proposalType && (currentStep < numSteps) && (
+                            <h1 className="text-3xl font-bold">
+                                {t(`common.steps.${navLinks[proposalType][currentStep-1]?.name}`)}
+                            </h1>
+                        )}
+                        {children}
+                    </div>
+                </form>
+            </Form>
+            {proposalType === "rehab" && <EquipmentForm/>}
+        </>
     );
 };
 

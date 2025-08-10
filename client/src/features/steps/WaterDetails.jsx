@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import CustomFormField from "../../components/CustomFormField";
-import NavButtons from "../../components/NavButtons";
+import CustomFormField from "@/components/CustomFormField";
+import NavButtons from "@/components/NavButtons";
 
 const WaterDetails = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const WaterDetails = () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/treatment-types`);
 
-                const listOptions = response.data.map((option) => ({ label: option[`name_${i18n.language}`], value: JSON.stringify(option) }));
+                const listOptions = response.data.map((option) => ({ label: option.name[i18n.language], value: JSON.stringify(option) }));
                 setPlantTypes(listOptions);
             }
             catch(err) {

@@ -16,7 +16,7 @@ router.get("/governorates", async (req, res) => {
         const db = client.db("ietos");
         const collection = db.collection("governorates");
 
-        const governorates = await collection.find().sort({ name_en: 1 }).toArray();
+        const governorates = await collection.find().sort({ "name.en": 1 }).toArray();
         res.json(governorates);
     }
     catch(err) {
@@ -47,7 +47,7 @@ router.get("/currencies", async (req, res) => {
         const db = client.db("ietos");
         const collection = db.collection("currencies");
 
-        const currencies = await collection.find().sort({ name_en: 1 }).toArray();
+        const currencies = await collection.find().sort({ "name.en": 1 }).toArray();
         res.json(currencies);
     }
     catch(err) {
@@ -63,6 +63,42 @@ router.get("/operations", async (req, res) => {
         const dataPath = path.join(__dirname, "../data", "operations.json");
         const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
 
+        res.json(jsonData);
+    }
+    catch(err) {
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+router.get("/equipments", async (req, res) => {
+    try {
+        const dataPath = path.join(__dirname, "../data", "equipments.json");
+        const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+        
+        res.json(jsonData);
+    }
+    catch(err) {
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+router.get("/actions", async (req, res) => {
+    try {
+        const dataPath = path.join(__dirname, "../data", "actions.json");
+        const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+        
+        res.json(jsonData);
+    }
+    catch(err) {
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+router.get("/specification-fields", async (req, res) => {
+    try {
+        const dataPath = path.join(__dirname, "../data", "specification.json");
+        const jsonData = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+        
         res.json(jsonData);
     }
     catch(err) {

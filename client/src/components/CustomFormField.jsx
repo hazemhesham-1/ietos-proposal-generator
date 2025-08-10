@@ -54,9 +54,9 @@ const CustomFormField = (props) => {
             name={name}
             render={({ field }) => (
                 <FormItem className={isCheckbox ? "flex items-center gap-2" : ""}>
-                    {!isCheckbox && <FormLabel>{label}</FormLabel>}
+                    {(label && !isCheckbox) && <FormLabel>{label}</FormLabel>}
                     <FormControl>{renderElement(field)}</FormControl>
-                    {isCheckbox && (
+                    {(label && isCheckbox) && (
                         <FormLabel className="text-sm font-normal">
                             {label}
                         </FormLabel>

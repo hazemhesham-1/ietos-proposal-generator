@@ -1,16 +1,31 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import CustomFormField from "../../components/CustomFormField";
-import NavButtons from "../../components/NavButtons";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import CustomFormField from "@/components/CustomFormField";
+import NavButtons from "@/components/NavButtons";
 
 const ClientDetails = () => {
     const { t, i18n } = useTranslation();
+    const { type: proposalType } = useParams();
     const [governorates, setGovernorates] = useState([]);
+    const [currencies, setCurrencies] = useState([]);
 
     const languages = [
-        { label: "Arabic", value: "ar" },
-        { label: "English", value: "en" },
+        {
+            label: {
+                ar: "العربية",
+                en: "Arabic"
+            },
+            value: "ar"
+        },
+        {
+            label: {
+                ar: "الإنجليزية",
+                en: "English"
+            },
+            value: "en"
+        },
     ];
 
     useEffect(() => {
@@ -18,8 +33,19 @@ const ClientDetails = () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/governorates`);
                 
-                const listOptions = response.data.map((option) => ({ label: option[`name_${i18n.language}`], value: JSON.stringify(option) }));
+                const listOptions = response.data.map((option) => ({ label: option.name[i18n.language], value: JSON.stringify(option) }));
                 setGovernorates(listOptions);
+            }
+            catch(err) {
+                console.error(err.message);
+            }
+        }
+        async function getCurrencies() {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/currencies`);
+
+                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name.en, value: JSON.stringify(option) }));
+                setCurrencies(listOptions);
             }
             catch(err) {
                 console.error(err.message);
@@ -27,6 +53,9 @@ const ClientDetails = () => {
         }
 
         getGovernorates();
+        if(proposalType === "rehab") {
+            getCurrencies();
+        }
     }, []);
 
     return (
@@ -38,10 +67,10 @@ const ClientDetails = () => {
                 description={t("forms.descriptions.documentCode")}
             />
             <CustomFormField
-                name="companyName"
-                label={t("forms.labels.companyName")}
-                placeholder={t("forms.placeholders.companyName")}
-                description={t("forms.descriptions.companyName")}
+                name="projectSubject"
+                label={t("forms.labels.projectSubject")}
+                placeholder={t("forms.placeholders.projectSubject")}
+                description={t("forms.descriptions.projectSubject")}
             />
             <CustomFormField
                 name="projectLocation"
@@ -79,8 +108,17 @@ const ClientDetails = () => {
                 name="language"
                 label={t("forms.labels.proposalLanguage")}
                 placeholder={t("forms.placeholders.proposalLanguage")}
-                options={languages}
+                options={languages.map((lang) => ({ label: lang.label[i18n.language], value: lang.value }))}
             />
+            {proposalType === "rehab" && (
+                <CustomFormField
+                    type="select"
+                    name="currency"
+                    label={t("forms.labels.currency")}
+                    placeholder={t("forms.placeholders.currency")}
+                    options={currencies}
+                />
+            )}
             <NavButtons hideBack={true}/>
         </>
     );

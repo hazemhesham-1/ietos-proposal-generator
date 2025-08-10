@@ -13,7 +13,7 @@ router.post("/generate", (req, res) => {
     const proposalData = req.body;
     const proposalContent = buildProposalContent(proposalData);
 
-    const templatePath = path.resolve(__dirname, "../templates", `template-${proposalData.language}.docx`);
+    const templatePath = path.resolve(__dirname, `../templates/${proposalData.documentCode}`, `template-${proposalData.language}.docx`);
     const content = fs.readFileSync(templatePath, "binary");
 
     const zip = new PizZip(content);

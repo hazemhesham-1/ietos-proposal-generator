@@ -1,0 +1,298 @@
+[
+    {
+        "key": "quantity",
+        "type": "number"
+    },
+    {
+        "key": "unit",
+        "type": "select",
+        "options": [
+            {
+                "labels": {
+                    "en": "Number",
+                    "ar": "عدد"
+                },
+                "value": "No."
+            },
+            {
+                "labels": {
+                    "en": "Lump sum",
+                    "ar": "مبلغ إجمالي"
+                },
+                "value": "LS"
+            },
+            {
+                "labels": {
+                    "en": "Meter",
+                    "ar": "متر"
+                },
+                "value": "meter"
+            }
+        ]
+    },
+    {
+        "key": "type",
+        "type": "text"
+    },
+    {
+        "key": "price",
+        "type": "number"
+    },
+    {
+        "key": "flow",
+        "type": "number"
+    },
+    {
+        "key": "head",
+        "type": "number"
+    },
+    {
+        "key": "size",
+        "type": "number"
+    },
+    {
+        "key": "casingMaterial",
+        "type": "select",
+        "options": [
+            {
+                "labels": {
+                    "en": "Stainless Steel",
+                    "ar": "فولاذ غير قابل للصدأ"
+                },
+                "value": "STST"
+            },
+            {
+                "labels": {
+                    "en": "Cast Iron",
+                    "ar": "حديد زهر"
+                },
+                "value": "castIron"
+            },
+            {
+                "labels": {
+                    "en": "Bronze",
+                    "ar": "برونز"
+                },
+                "value": "bronze"
+            },
+            {
+                "labels": {
+                    "en": "PVC",
+                    "ar": "بي في سي"
+                },
+                "value": "pvc"
+            },
+            {
+                "labels": {
+                    "en": "GRP",
+                    "ar": "بلاستيك مدعم بالألياف الزجاجية"
+                },
+                "value": "grp"
+            },
+            {
+                "labels": {
+                    "en": "HDPE",
+                    "ar": "بولي إيثيلين عالي الكثافة"
+                },
+                "value": "hdpe"
+            },
+            {
+                "labels": {
+                    "en": "Other",
+                    "ar": "أخرى"
+                },
+                "value": "other"
+            }
+        ]
+    },
+    {
+        "key": "shaftMaterial",
+        "type": "select",
+        "options": [
+            {
+                "labels": {
+                    "en": "Stainless Steel",
+                    "ar": "فولاذ غير قابل للصدأ"
+                },
+                "value": "STST"
+            },
+            {
+                "labels": {
+                    "en": "Cast Iron",
+                    "ar": "حديد زهر"
+                },
+                "value": "castIron"
+            },
+            {
+                "labels": {
+                    "en": "Bronze",
+                    "ar": "برونز"
+                },
+                "value": "bronze"
+            },
+            {
+                "labels": {
+                    "en": "PVC",
+                    "ar": "بي في سي"
+                },
+                "value": "pvc"
+            },
+            {
+                "labels": {
+                    "en": "GRP",
+                    "ar": "بلاستيك مدعم بالألياف الزجاجية"
+                },
+                "value": "grp"
+            },
+            {
+                "labels": {
+                    "en": "HDPE",
+                    "ar": "بولي إيثيلين عالي الكثافة"
+                },
+                "value": "hdpe"
+            },
+            {
+                "labels": {
+                    "en": "Other",
+                    "ar": "أخرى"
+                },
+                "value": "other"
+            }
+        ]
+    },
+    {
+        "key": "impellerMaterial",
+        "type": "select",
+        "options": [
+            {
+                "labels": {
+                    "en": "Stainless Steel",
+                    "ar": "فولاذ غير قابل للصدأ"
+                },
+                "value": "STST"
+            },
+            {
+                "labels": {
+                    "en": "Cast Iron",
+                    "ar": "حديد زهر"
+                },
+                "value": "castIron"
+            },
+            {
+                "labels": {
+                    "en": "Bronze",
+                    "ar": "برونز"
+                },
+                "value": "bronze"
+            },
+            {
+                "labels": {
+                    "en": "PVC",
+                    "ar": "بي في سي"
+                },
+                "value": "pvc"
+            },
+            {
+                "labels": {
+                    "en": "GRP",
+                    "ar": "بلاستيك مدعم بالألياف الزجاجية"
+                },
+                "value": "grp"
+            },
+            {
+                "labels": {
+                    "en": "HDPE",
+                    "ar": "بولي إيثيلين عالي الكثافة"
+                },
+                "value": "hdpe"
+            },
+            {
+                "labels": {
+                    "en": "Other",
+                    "ar": "أخرى"
+                },
+                "value": "other"
+            }
+        ]
+    },
+    {
+        "key": "valves",
+        "type": "text"
+    },
+    {
+        "key": "protection",
+        "type": "select",
+        "options": [
+            {
+                "labels": {
+                    "en": "IP54",
+                    "ar": "IP54"
+                },
+                "value": "ip54"
+            },
+            {
+                "labels": {
+                    "en": "IP55",
+                    "ar": "IP55"
+                },
+                "value": "ip55"
+            },
+            {
+                "labels": {
+                    "en": "IP65",
+                    "ar": "IP65"
+                },
+                "value": "ip65"
+            },
+            {
+                "labels": {
+                    "en": "IP67",
+                    "ar": "IP67"
+                },
+                "value": "ip67"
+            },
+            {
+                "labels": {
+                    "en": "IP68",
+                    "ar": "IP68"
+                },
+                "value": "ip68"
+            },
+            {
+                "labels": {
+                    "en": "Other",
+                    "ar": "أخرى"
+                },
+                "value": "other"
+            }
+        ]
+    },
+    {
+        "key": "manufacturer",
+        "type": "text"
+    },
+    {
+        "key": "origin",
+        "type": "text"
+    },
+    {
+        "key": "pressure",
+        "type": "number"
+    },
+    {
+        "key": "temperature",
+        "type": "number"
+    },
+    {
+        "key": "poreSize",
+        "type": "number"
+    },
+    {
+        "key": "model",
+        "type": "text"
+    },
+    {
+        "key": "capacity",
+        "type": "number"
+    }
+]

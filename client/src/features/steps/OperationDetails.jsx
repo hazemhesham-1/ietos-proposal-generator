@@ -1,77 +1,44 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import axios from "axios";
-import { CalendarCheckIcon, FileTextIcon, FlaskConicalIcon, RefreshCcwIcon, UsersIcon, WrenchIcon } from "lucide-react";
-import NavButtons from "../../components/NavButtons";
-import Checklist from "./Checklist";
-import NestedChecklist from "./NestedChecklist";
-import DynamicFormField from "./DynamicFormField";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { initEquipmentList } from "../equipments/equipmentSlice";
+import { getEquipments } from "@/services/apiEquipments";
+import { getOperations } from "@/services/apiOperations";
+import NavButtons from "@/components/NavButtons";
+import OMProposalForm from "@/features/proposals/OMProposalForm";
+import RehabProposalForm from "@/features/proposals/RehabProposalForm";
 
 const OperationDetails = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation();
-    const [operations, setOperations] = useState({});
-
-    useEffect(() => {
-        async function getOperations() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/operations`);
-                setOperations(response.data);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-
-        getOperations();
-    }, []);
+    const { type } = useParams();
+    
+    const dispatch = useDispatch();
+    const data = useLoaderData();
+    if(type === "rehab") {
+        dispatch(initEquipmentList(data));
+    }
 
     return (
         <>
-            <h1 className="text-3xl font-bold">
-                {t("common.businessScope")}
-            </h1>
-            <div className="space-y-16">
-                <Checklist
-                    name="operationScope"
-                    title={t("common.operationMaintenanceScope")}
-                    itemsList={operations.tasks}
-                    icon={<WrenchIcon/>}
-                />
-                <Checklist
-                    name="manpower"
-                    title={t("common.manpower")}
-                    itemsList={operations.manpower}
-                    icon={<UsersIcon/>}
-                />
-                <NestedChecklist
-                    name="operationSchedule"
-                    title={t("common.operationsSchedule")}
-                    itemsList={operations.schedules}
-                    icon={<CalendarCheckIcon/>}
-                />
-                <Checklist
-                    name="chemicalManagement"
-                    title={t("common.chemicalsManagement")}
-                    itemsList={operations.chemicals}
-                    icon={<FlaskConicalIcon/>}
-                />
-                <DynamicFormField
-                    name="reports"
-                    label={t("common.reports")}
-                    icon={<FileTextIcon/>}
-                />
-                <NestedChecklist
-                    name="replacements"
-                    title={t("common.replacements")}
-                    itemsList={operations.replacements}
-                    icon={<RefreshCcwIcon/>}
-                />
-            </div>
+            {type === "om-offer" && <OMProposalForm operations={data}/>}
+            {type === "rehab" && <RehabProposalForm/>}
             <NavButtons onBackTo={() => navigate(-1)}/>
         </>
     );
 };
+
+export async function loader({ params }) {
+    const { type } = params;
+
+    if(type === "om-offer") {
+        const operations = await getOperations();
+        return operations;
+    }
+    else if(type === "rehab") {
+        const equipments = await getEquipments();
+        return equipments;
+    }
+
+    throw new Response("Not Found", { status: 404 });
+}
 
 export default OperationDetails;

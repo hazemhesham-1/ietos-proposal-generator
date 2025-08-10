@@ -1,0 +1,154 @@
+[
+    {
+        "data": {
+            "en": {
+                "category": "Pumps",
+                "description": "Move water through the treatment process",
+                "equipments": [
+                    { "label": "Submersible Pump", "value": "submersible" },
+                    { "label": "Centrifugal Pump", "value": "centrifugal" },
+                    { "label": "Dosing Pumps", "value": "dosing" }
+                ]
+            },
+            "ar": {
+                "category": "المضخات",
+                "description": "نقل المياه خلال عملية المعالجة",
+                "equipments": [
+                    { "label": "مضخة غاطسة", "value": "submersible" },
+                    { "label": "مضخة طرد مركزي", "value": "centrifugal" },
+                    { "label": "مضخة جرعات", "value": "dosing" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "type", "price", "flow", "head", "casingMaterial", "shaftMaterial", "impellerMaterial", "valves", "protection", "manufacturer", "origin"],
+        "value": "pumps"
+    },
+    {
+        "data": {
+            "en": {
+                "category": "Aeration Systems",
+                "description": "Supply oxygen to biological treatment processes",
+                "equipments": [
+                    { "label": "Air Pipelines", "value": "air-pipelines" },
+                    { "label": "Blowers", "value": "blowers" },
+                    { "label": "Coarse Bubble Diffusers", "value": "coarse-diffusers" },
+                    { "label": "Disc Diffusers", "value": "disc-diffusers" },
+                    { "label": "Fine Bubble Diffusers", "value": "fine-diffusers" }
+                ]
+            },
+            "ar": {
+                "category": "أنظمة التهوية",
+                "description": "توفير الأكسجين لعمليات المعالجة البيولوجية",
+                "equipments": [
+                    { "label": "أنابيب الهواء", "value": "air-pipelines" },
+                    { "label": "موزعات الفقاعات الخشنة", "value": "coarse-diffusers" },
+                    { "label": "موزعات الفقاعات الدقيقة", "value": "fine-diffusers" },
+                    { "label": "موزعات القرص", "value": "disc-diffusers" },
+                    { "label": "المنافيخ الهوائية", "value": "blowers" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "type", "price", "size", "manufacturer", "origin"],
+        "value": "aeration-systems"
+    },
+    {
+        "data": {
+            "en": {
+                "category": "Filtration Systems",
+                "description": "Remove suspended solids and contaminants",
+                "equipments": [
+                    { "label": "Multimedia Filter", "value": "multi-media-filter" },
+                    { "label": "Sand Filter", "value": "sand-filter" },
+                    { "label": "Cartridge Filter", "value": "cartridge-filter" }
+                ]
+            },
+            "ar": {
+                "category": "أنظمة الترشيح",
+                "description": "إزالة المواد الصلبة العالقة والملوثات",
+                "equipments": [
+                    { "label": "فلتر الوسائط المتعددة", "value": "multi-media-filter" },
+                    { "label": "فلتر الرمل", "value": "sand-filter" },
+                    { "label": "فلتر الخرطوشة", "value": "cartridge-filter" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "type", "price", "flow", "pressure", "casingMaterial", "manufacturer", "origin"],
+        "value": "filtration-systems"
+    },
+    {
+        "data": {
+            "en": {
+                "category": "Membrane Systems",
+                "description": "Remove fine particles and dissolved salts",
+                "equipments": [
+                    { "label": "Reverse Osmosis (RO)", "value": "reverse-osmosis" },
+                    { "label": "Ultrafiltration (UF)", "value": "ultrafiltration" },
+                    { "label": "Nanofiltration (NF)", "value": "nanofiltration" }
+                ]
+            },
+            "ar": {
+                "category": "أنظمة الأغشية",
+                "description": "إزالة الجزيئات الدقيقة والأملاح الذائبة",
+                "equipments": [
+                    { "label": "التناضح العكسي (RO)", "value": "reverse-osmosis" },
+                    { "label": "الترشيح الفائق (UF)", "value": "ultrafiltration" },
+                    { "label": "الترشيح النانوي (NF)", "value": "nanofiltration" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "price", "flow", "pressure", "poreSize", "temperature", "manufacturer", "origin"],
+        "value": "membrane-systems"
+    },
+    {
+        "data": {
+            "en": {
+                "category": "Control Systems",
+                "description": "Monitor, control, and automate plant operations",
+                "equipments": [
+                    { "label": "PLC Panel", "value": "plc-panel" },
+                    { "label": "Control Panel", "value": "control-panel" },
+                    { "label": "Flow Meter", "value": "flow-meter" },
+                    { "label": "pH Sensor", "value": "ph-sensor" },
+                    { "label": "Level Sensor", "value": "level-sensor" }
+                ]
+            },
+            "ar": {
+                "category": "أنظمة التحكم",
+                "description": "مراقبة، وتحكم، وأتمتة عمليات المحطة",
+                "equipments": [
+                    { "label": "لوحة تحكم PLC", "value": "plc-panel" },
+                    { "label": "لوحة التحكم", "value": "control-panel" },
+                    { "label": "جهاز قياس التدفق", "value": "flow-meter" },
+                    { "label": "حساس الرقم الهيدروجيني", "value": "ph-sensor" },
+                    { "label": "حساس المستوى", "value": "level-sensor" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "type", "price", "model", "protection", "manufacturer", "origin"],
+        "value": "control-systems"
+    },
+    {
+        "data": {
+            "en": {
+                "category": "Disinfection Systems",
+                "description": "Kill pathogens and ensure treated water is safe",
+                "equipments": [
+                    { "label": "UV Disinfection Unit", "value": "uv-disinfection" },
+                    { "label": "Chlorination System", "value": "chlorination" },
+                    { "label": "Ozonation System", "value": "ozonation" }
+                ]
+            },
+            "ar": {
+                "category": "أنظمة التعقيم",
+                "description": "قتل مسببات الأمراض وضمان سلامة المياه المعالجة",
+                "equipments": [
+                    { "label": "وحدة التعقيم بالأشعة فوق البنفسجية", "value": "uv-disinfection" },
+                    { "label": "نظام الكلورة", "value": "chlorination" },
+                    { "label": "نظام الأوزنة", "value": "ozonation" }
+                ]
+            }
+        },
+        "fields": ["quantity", "unit", "type", "price", "capacity", "protection", "manufacturer", "origin"],
+        "value": "disinfection-systems"
+    }
+]

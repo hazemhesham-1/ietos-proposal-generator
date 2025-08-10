@@ -5,7 +5,7 @@ import ProposalForm from "./components/ProposalForm";
 import Home from "./components/Home";
 import ClientDetails from "./features/steps/ClientDetails";
 import WaterDetails from "./features/steps/WaterDetails";
-import OperationDetails from "./features/steps/OperationDetails";
+import OperationDetails, { loader as operationsLoader } from "./features/steps/OperationDetails";
 import PricingDetails from "./features/steps/PricingDetails";
 import ProposalGenerator from "./features/steps/ProposalGenerator";
 import ProposalSelector from "./features/proposals/ProposalSelector";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
             { path: "/create-proposal", element: <ProposalSelector/> },
             { path: "/create-proposal/:type/client-info", element: <ClientDetails/> },
             { path: "/create-proposal/:type/water-details", element: <WaterDetails/> },
-            { path: "/create-proposal/:type/work-scope", element: <OperationDetails/> },
+            { path: "/create-proposal/:type/work-scope", element: <OperationDetails/>, loader: operationsLoader },
             { path: "/create-proposal/:type/financial", element: <PricingDetails/> },
             { path: "/create-proposal/:type/generate-doc", element: <ProposalGenerator/> },
         ],
