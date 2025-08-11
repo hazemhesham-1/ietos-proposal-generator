@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    isEditModal: false,
     isModalOpen: false,
-    currentStep: 0,
+    currentStep: 1,
     data: {},
     list: [],
 };
@@ -18,7 +19,7 @@ const equipmentSlice = createSlice({
             state.data = { ...state.data, ...action.payload };
         },
         resetEquipment: (state) => {
-            state.currentStep = 0;
+            state.currentStep = 1;
             state.data = {};
         },
         nextStep: (state) => {
@@ -28,16 +29,23 @@ const equipmentSlice = createSlice({
             if(state.currentStep <= 1) return;
             state.currentStep = state.currentStep - 1;
         },
+        openEditModal: (state, action) => {
+            state.isModalOpen = true;
+            state.isEditModal = true;
+            state.currentStep = 1;
+            state.data = { ...state.data, ...action.payload };
+        },
         openModal: (state) => {
             state.isModalOpen = true;
             state.currentStep = 1;
         },
         closeModal: (state) => {
             state.isModalOpen = false;
+            state.isEditModal = false;
         },
     }
 });
 
-export const { initEquipmentList, setEquipmentData, resetEquipment, nextStep, prevStep, openModal, closeModal } = equipmentSlice.actions;
+export const { initEquipmentList, setEquipmentData, resetEquipment, nextStep, prevStep, openModal, openEditModal, closeModal } = equipmentSlice.actions;
 
 export default equipmentSlice.reducer;

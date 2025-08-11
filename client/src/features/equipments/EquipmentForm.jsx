@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -15,6 +16,7 @@ const defaultValues = {
     location: "",
     actionType: "",
     quantity: 1,
+    unit: "No.",
 };
 
 const EquipmentForm = () => {
@@ -22,7 +24,7 @@ const EquipmentForm = () => {
     const methods = useForm({ defaultValues });
     
     const dispatch = useDispatch();
-    const { isModalOpen, currentStep: modalStep, list: equipmentsList } = useSelector((state) => state.equipment);
+    const { isModalOpen, isEditModal, data: equipmentData, currentStep: modalStep, list: equipmentsList } = useSelector((state) => state.equipment);
     const equipments = equipmentsList?.map(({ data, fields, value }) => ({ ...data[i18n.language], fields, value }));
 
     const category = methods.watch("category");
@@ -31,13 +33,26 @@ const EquipmentForm = () => {
 
     const isLastStep = modalStep === stepKeys.length;
 
+    useEffect(() => {
+        if(!isEditModal) return;
+        methods.reset(equipmentData);
+    }, [isEditModal]);
+
     function onSubmit(data) {
         if(!isLastStep) {
             dispatch(nextStep());
             return;
         }
 
-        dispatch(setEquipmentData(data));
+        dispatch(closeModal());
+        if("id" in data) {
+            dispatch(setEquipmentData(data));
+        }
+        else {
+            const id = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+            dispatch(setEquipmentData({ ...data, id }));
+        }
+
         methods.reset(defaultValues);
     }
 
@@ -89,7 +104,7 @@ const EquipmentForm = () => {
                                 </Button>
                             )}
                             <Button type="submit" disabled={!category}>
-                                {!isLastStep ? t("buttons.next") : t("buttons.addEquipment")}
+                                {!isLastStep ? t("buttons.next") : isEditModal ? t("buttons.updateEquipment") : t("buttons.addEquipment")}
                             </Button>
                         </DialogFooter>
                     </form>

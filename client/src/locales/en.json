@@ -2,6 +2,9 @@
     "buttons": {
         "generateProposal": "Generate Proposal",
         "addEquipment": "Add Equipment",
+        "updateEquipment": "Update Equipment",
+        "edit": "Edit",
+        "remove": "Remove",
         "next": "Next",
         "previous": "Previous",
         "back": "Back"
@@ -25,13 +28,18 @@
         },
         "table": {
             "equipmentList": "List of Equipment",
-            "equipmentName": "Equipment Name"
+            "equipmentName": "Equipment Name",
+            "actions": "Actions"
         }
     },
     "messages": {
         "generateDocument": {
             "title": "Finalize & Generate Proposal",
             "description": "You’ve completed all the required steps. Now, generate a tailored technical proposal for your water treatment solution. Review the content after generation to ensure accuracy and alignment with client needs."
+        },
+        "removeEquipment": {
+            "title": "Confirm Deletion",
+            "description": "Are you sure you want to delete this item? This action cannot be undone."
         }
     },
     "dialog": {
