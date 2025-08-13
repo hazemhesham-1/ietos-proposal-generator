@@ -8,7 +8,7 @@ const Stepper = ({ currentStep, steps = [] }) => {
     if(!currentStep) return null;
 
     return (
-        <nav className="rounded-2xl hidden relative p-10 overflow-hidden shadow-md min-h-screen md:block">
+        <nav className="rounded-e-md hidden relative p-10 overflow-hidden shadow-md min-h-screen md:block">
             <img
                 src="/water-treatment-bg.png"
                 alt="Water Treatment Plant"
@@ -17,7 +17,7 @@ const Stepper = ({ currentStep, steps = [] }) => {
             <div className="relative w-full mb-32 opacity-90">
                 <img
                     src="/logo-light.png"
-                    alt="IETOS Company Logo"
+                    alt="IWOMT Company Logo"
                     className="absolute inset-0 object-cover"
                 />
             </div>

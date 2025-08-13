@@ -7,7 +7,10 @@
         "remove": "Remove",
         "next": "Next",
         "previous": "Previous",
-        "back": "Back"
+        "back": "Back",
+        "login": "Log in",
+        "logout": "Logout",
+        "openMenu": "Open main menu"
     },
     "common": {
         "businessScope": "Business scope",
@@ -24,6 +27,7 @@
             "waterDetails": "Source Water Details",
             "businessScope": "Business Scope",
             "financialOffer": "Financial Offer",
+            "contractDetails": "Contract Details",
             "generateDocument": "Generate Document"
         },
         "table": {
@@ -53,6 +57,7 @@
             "price": "Unit Price",
             "flow": "Flow Rate (m³/hr)",
             "head": "Head (m)",
+            "headPressure": "Head (bar)",
             "size": "Size (inch)",
             "casingMaterial": "Casing Material",
             "shaftMaterial": "Shaft Material",
@@ -62,6 +67,8 @@
             "manufacturer": "Manufacturer",
             "origin": "Country of Origin",
             "pressure": "Pressure (bar)",
+            "diameter": "Filter Diameter (mm)",
+            "height": "Effective Height (mm)",
             "temperature": "Operating Temperature",
             "poreSize": "Pore Size (µm)",
             "model": "Model Number",
@@ -74,6 +81,7 @@
             "price": "e.g., 1250.00",
             "flow": "e.g., 14",
             "head": "e.g., 11.8",
+            "headPressure": "e.g., 392",
             "size": "e.g., 2.5 inch",
             "casingMaterial": "e.g. Stainless Steel",
             "shaftMaterial": "e.g. Stainless Steel",
@@ -83,6 +91,8 @@
             "manufacturer": "e.g. Grundfos",
             "origin": "e.g. Denmark",
             "pressure": "e.g. 6",
+            "diameter": "e.g., 1200",
+            "height": "e.g., 2500",
             "temperature": "e.g. 45°C",
             "poreSize": "e.g. 0.01",
             "model": "e.g. CR 10",
@@ -99,6 +109,8 @@
             "manufacturer": "Enter the name of the company that manufactured the equipment.",
             "origin": "State the country where the equipment was made.",
             "pressure": "Specify the maximum working pressure in bars.",
+            "diameter": "Enter the filter diameter in millimeters (mm).",
+            "height": "Enter the effective height of the filter media in millimeters (mm).",
             "temperature": "Enter the recommended operating temperature.",
             "poreSize": "Enter the pore size of the membrane in microns.",
             "model": "Enter the model number provided by the manufacturer.",
@@ -133,6 +145,7 @@
             "offerValidity": "Offer Validity (Days)",
             "treatmentType": "Treatment Plant Type",
             "workScope": "Scope of Work",
+            "paymentTerms": "Terms of Payment",
             "actionType": "Action Type",
             "equipment": "{{category}} Type",
             "equipmentLocation": "Location of the Equipment"
@@ -144,7 +157,7 @@
             "contactPerson": "e.g., Eng. Mohamed Adel",
             "documentCode": "e.g., I25OPM123",
             "jobTitle": "e.g., Head of Engineering Department",
-            "projectSubject": "e.g., Supply and installation of a centrifugal pump",
+            "projectSubject": "e.g., Wastewater Treatment Plant",
             "projectGovernorate": "Select governorate",
             "projectLocation": "e.g., 6th of October City, Giza",
             "proposalLanguage": "Select language",
@@ -153,6 +166,7 @@
             "offerValidity": "e.g., 30 days",
             "treatmentType": "Select plant type",
             "workScope": "e.g., Install centrifugal pump and connect electrical panel",
+            "paymentTerms": "Enter payment term (e.g. 30 days)",
             "actionType": "Select the action to perform",
             "equipment": "Select {{category}} type",
             "equipmentLocation": "e.g., at the balance tank or Unit 03 Room A"
@@ -170,9 +184,22 @@
             "monthlyWorks": "Enter the monthly value of the proposed works, excluding tax",
             "offerValidity": "Specify how long the financial and technical offer remains valid from the date of submission.",
             "workScope": "Add or remove installation tasks as part of the scope of work",
+            "paymentTerms": "Add one or more payment terms for this offer.",
             "actionType": "Choose the purpose of this operation (e.g., install or replace the equipment)",
             "equipment": "Choose the type of {{category}} used in the system",
             "equipmentLocation": "Specify the exact physical location of the equipment within the plant"
         }
+    },
+    "header": {
+        "dashboard": "Dashboard",
+        "waterSystems": "Water Systems",
+        "reports": "Reports",
+        "maintenanceLogs": "Maintenance Logs",
+        "inventory": "Inventory",
+        "staff": "Staff Management",
+        "settings": "Settings",
+        "support": "Help & Support",
+        "language": "Language",
+        "profile": "Profile"
     }
 }

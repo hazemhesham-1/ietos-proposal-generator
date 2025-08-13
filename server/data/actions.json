@@ -22,6 +22,17 @@
         }
     },
     {
+    "value": "supply",
+        "label": {
+            "en": "Supply",
+            "ar": "توريد"
+        },
+        "description": {
+            "en": "Providing and delivering new equipment as per specifications",
+            "ar": "توفير وتسليم معدات جديدة وفق المواصفات المطلوبة"
+        }
+    },
+    {
         "value": "inspect",
         "label": {
             "en": "Inspection",

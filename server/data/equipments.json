@@ -48,7 +48,7 @@
                 ]
             }
         },
-        "fields": ["quantity", "unit", "type", "price", "size", "manufacturer", "origin"],
+        "fields": ["quantity", "unit", "type", "price", "flow", "headPressure", "size", "manufacturer", "origin"],
         "value": "aeration-systems"
     },
     {
@@ -72,7 +72,7 @@
                 ]
             }
         },
-        "fields": ["quantity", "unit", "type", "price", "flow", "pressure", "casingMaterial", "manufacturer", "origin"],
+        "fields": ["quantity", "unit", "type", "price", "diameter", "height", "flow", "pressure", "casingMaterial", "manufacturer", "origin"],
         "value": "filtration-systems"
     },
     {
@@ -107,8 +107,11 @@
                 "equipments": [
                     { "label": "PLC Panel", "value": "plc-panel" },
                     { "label": "Control Panel", "value": "control-panel" },
-                    { "label": "Flow Meter", "value": "flow-meter" },
+                    { "label": "Ultrasonic Flow Meter", "value": "us-flow-meter" },
+                    { "label": "Magnetic Flow Meter", "value": "magnetic-flow-meter" },
+                    { "label": "ORP Sensor", "value": "orp-sensor" },
                     { "label": "pH Sensor", "value": "ph-sensor" },
+                    { "label": "H₂S Sensor", "value": "h2s-sensor" },
                     { "label": "Level Sensor", "value": "level-sensor" }
                 ]
             },
@@ -118,8 +121,11 @@
                 "equipments": [
                     { "label": "لوحة تحكم PLC", "value": "plc-panel" },
                     { "label": "لوحة التحكم", "value": "control-panel" },
-                    { "label": "جهاز قياس التدفق", "value": "flow-meter" },
-                    { "label": "حساس الرقم الهيدروجيني", "value": "ph-sensor" },
+                    { "label": "جهاز قياس التدفق بالموجات فوق الصوتية", "value": "us-flow-meter" },
+                    { "label": "جهاز قياس التدفق الكهرومغناطيسي", "value": "magnetic-flow-meter" },
+                    { "label": "حساس الجهد التأكسدي الاختزالي (ORP)", "value": "orp-sensor" },
+                    { "label": "حساس الرقم الهيدروجيني (pH)", "value": "ph-sensor" },
+                    { "label": "حساس كبريتيد الهيدروجين (H₂S)", "value": "h2s-sensor" },
                     { "label": "حساس المستوى", "value": "level-sensor" }
                 ]
             }

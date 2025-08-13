@@ -1,16 +1,25 @@
 import { useEffect } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ProposalForm from "./components/ProposalForm";
+import MainLayout from "./components/MainLayout";
 import Home from "./components/Home";
+import ProposalForm from "./components/ProposalForm";
 import ClientDetails from "./features/steps/ClientDetails";
 import WaterDetails from "./features/steps/WaterDetails";
 import OperationDetails, { loader as operationsLoader } from "./features/steps/OperationDetails";
-import PricingDetails from "./features/steps/PricingDetails";
+import ContractDetails from "./features/steps/ContractDetails";
 import ProposalGenerator from "./features/steps/ProposalGenerator";
 import ProposalSelector from "./features/proposals/ProposalSelector";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <MainLayout/>,
+        children: [
+            { index: true, element: <Home/> },
+            { path: "/create-proposal", element: <ProposalSelector/> },
+        ]
+    },
     {
         element: (
             <ProposalForm>
@@ -18,12 +27,10 @@ const router = createBrowserRouter([
             </ProposalForm>
         ),
         children: [
-            { path: "/", element: <Home/> },
-            { path: "/create-proposal", element: <ProposalSelector/> },
             { path: "/create-proposal/:type/client-info", element: <ClientDetails/> },
             { path: "/create-proposal/:type/water-details", element: <WaterDetails/> },
             { path: "/create-proposal/:type/work-scope", element: <OperationDetails/>, loader: operationsLoader },
-            { path: "/create-proposal/:type/financial", element: <PricingDetails/> },
+            { path: "/create-proposal/:type/contract-details", element: <ContractDetails/> },
             { path: "/create-proposal/:type/generate-doc", element: <ProposalGenerator/> },
         ],
     }
@@ -41,9 +48,7 @@ function App() {
     }, [i18n.language]);
 
     return (
-        <main className="px-2 py-8 sm:px-8">
-            <RouterProvider router={router}/>
-        </main>
+        <RouterProvider router={router}/>
     );
 };
 

@@ -17,7 +17,7 @@
             {
                 "labels": {
                     "en": "Lump sum",
-                    "ar": "مبلغ إجمالي"
+                    "ar": "مقطوعية"
                 },
                 "value": "LS"
             },
@@ -44,6 +44,10 @@
     },
     {
         "key": "head",
+        "type": "number"
+    },
+    {
+        "key": "headPressure",
         "type": "number"
     },
     {
@@ -277,6 +281,14 @@
     },
     {
         "key": "pressure",
+        "type": "number"
+    },
+    {
+        "key": "height",
+        "type": "number"
+    },
+    {
+        "key": "diameter",
         "type": "number"
     },
     {

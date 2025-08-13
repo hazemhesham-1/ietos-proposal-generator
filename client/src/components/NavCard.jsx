@@ -2,7 +2,7 @@ const NavCard = ({ title, description, href, imageSrc, imageAlt }) => {
     return (
         <a
             href={href}
-            className="bg-white border border-border rounded-lg grid items-center shadow-sm group md:grid-cols-2 hover:bg-slate-300 hover:scale-105 transition-all"
+            className="bg-gradient-to-r from-slate-100 to-slate-300/50 rounded-lg grid items-center group md:grid-cols-2 hover:to-primary-500/50 hover:scale-105 transition"
         >
             <img
                 src={imageSrc}

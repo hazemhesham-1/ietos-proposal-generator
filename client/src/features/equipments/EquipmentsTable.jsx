@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useFormContext } from "react-hook-form";
-import { isValidJSON } from "@/lib/utils";
+import { capitalizeText, isValidJSON } from "@/lib/utils";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/Table";
 import EquipmentRowActions from "./EquipmentRowActions";
 
@@ -63,7 +63,10 @@ const EquipmentRow = ({ item, index }) => {
     return (
         <TableRow>
             <TableCell className="font-medium">{index}</TableCell>
-            <TableCell>{item.type ? item.type : selectedItem.label} {item.location ? `(${item.location})` : ""}</TableCell>
+            <TableCell>
+                {item.type ? capitalizeText(item.type) : selectedItem.label}
+                {item.location ? ` (${capitalizeText(item.location)})` : ""}
+            </TableCell>
             <TableCell>{item.unit}</TableCell>
             <TableCell>{item.quantity}</TableCell>
             <TableCell>{item.price}</TableCell>
