@@ -16,7 +16,7 @@ const EquipmentsTable = ({ equipments }) => {
     return (
         <Table className="border border-border">
             <TableCaption>{t("common.table.equipmentList")}</TableCaption>
-            <TableHeader>
+            <TableHeader className="bg-primary-200">
                 <TableRow>
                     <TableHead className="w-25">#</TableHead>
                     <TableHead>{t("common.table.equipmentName")}</TableHead>
@@ -39,11 +39,11 @@ const EquipmentsTable = ({ equipments }) => {
             <TableFooter>
                 <TableRow>
                     <TableCell colSpan={5}>{t("common.totalPrice")}</TableCell>
-                    <TableCell className="text-end">{(totalPrice).toFixed(2)} {currency.value}</TableCell>
+                    <TableCell className="text-accent-700 font-semibold text-end">{(totalPrice).toFixed(2)} {currency.value}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell colSpan={5}>{t("common.totalPriceWithFees", { percent: 14 })}</TableCell>
-                    <TableCell className="text-end">{(totalPrice * 1.14).toFixed(2)} {currency.value}</TableCell>
+                    <TableCell className="text-accent-700 font-semibold text-end">{(totalPrice * 1.14).toFixed(2)} {currency.value}</TableCell>
                 </TableRow>
             </TableFooter>
         </Table>

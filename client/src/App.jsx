@@ -10,6 +10,7 @@ import OperationDetails, { loader as operationsLoader } from "./features/steps/O
 import ContractDetails from "./features/steps/ContractDetails";
 import ProposalGenerator from "./features/steps/ProposalGenerator";
 import ProposalSelector from "./features/proposals/ProposalSelector";
+import StaffManagement from "./features/staff/StaffManagement";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Home/> },
             { path: "/create-proposal", element: <ProposalSelector/> },
+            { path: "/staff-management", element: <StaffManagement/> },
         ]
     },
     {

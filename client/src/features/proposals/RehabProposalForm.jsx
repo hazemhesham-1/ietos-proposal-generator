@@ -50,9 +50,7 @@ const RehabProposalForm = () => {
             <p className="text-muted-foreground text-sm">
                 {t("forms.descriptions.workScope")}
             </p>
-            <div>
-                <EquipmentsTable equipments={equipments}/>
-            </div>
+            {equipments.length > 0 && <EquipmentsTable equipments={equipments}/>}
         </div>
     );
 };

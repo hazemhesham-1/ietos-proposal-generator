@@ -166,10 +166,10 @@ const ProposalForm = ({ children }) => {
             <Form {...methods}>
                 <form
                     onSubmit={methods.handleSubmit(onSubmit)}
-                    className="flex justify-between gap-20 w-full"
+                    className="justify-between gap-20 w-full lg:flex"
                 >
                     <Stepper currentStep={currentStep} steps={navLinks[proposalType]}/>
-                    <div className="flex-1 flex flex-col gap-8 my-12 px-5 md:ps-0 md:pe-16">
+                    <div className="flex-1 flex flex-col gap-8 my-12 px-5 lg:ps-0 lg:pe-16">
                         {proposalType && (currentStep < numSteps) && (
                             <h1 className="text-3xl font-bold">
                                 {t(`common.steps.${navLinks[proposalType][currentStep-1]?.name}`)}

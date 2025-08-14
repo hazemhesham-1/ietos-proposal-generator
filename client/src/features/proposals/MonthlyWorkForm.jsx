@@ -53,7 +53,7 @@ const MonthlyWorkForm = () => {
             />
             {(monthlyWorkValue > 0) && (
                 <>
-                    <div className="text-red-700 text-sm font-semibold">
+                    <div className="text-primary-700 text-sm font-semibold">
                         <p>
                             {t("forms.labels.monthlyWorks")}: {monthlyWorkValue} {currency?.value}
                         </p>
@@ -64,7 +64,7 @@ const MonthlyWorkForm = () => {
                             {t("forms.labels.monthlyWithTax")}: {Math.round(Number(monthlyWorkValue) + Number(monthlyTaxAmount))} {currency?.value}
                         </p>
                     </div>
-                    <div className="text-red-700 text-sm font-semibold">
+                    <div className="text-primary-700 text-sm font-semibold">
                         <p>
                             {t("forms.labels.annualWorks")}: {annualWorkValue} {currency?.value}
                         </p>

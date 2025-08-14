@@ -19,11 +19,7 @@ const navLinks = [
     },
     {
         label: "staff",
-        href: "#",
-    },
-    {
-        label: "waterSystems",
-        href: "#",
+        href: "/staff-management",
     },
 ];
 
@@ -32,8 +28,8 @@ const Header = () => {
     const { t } = useTranslation();
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
-    const isActive = (path) => location.pathname.startsWith(path);
-
+    const isActive = (path) => location.pathname === path;
+    
     return (
         <header>
             <nav className="border-border px-4 py-2.5 lg:px-6">
@@ -69,7 +65,6 @@ const Header = () => {
                             <li key={`link-${i+1}`}>
                                 <a
                                     href={link.href}
-                                    onClick={() => setIsMenuOpen(false)}
                                     className={`${isActive(link.href) ? "bg-primary-700 text-slate-100 lg:bg-transparent lg:text-primary-700" : "text-slate-700 lg:hover:text-primary-700"} border-b border-slate-100 block ps-3 pe-4 py-2 hover:bg-slate-50 lg:border-0 lg:p-0`}
                                 >
                                     {t(`header.${link.label}`)}

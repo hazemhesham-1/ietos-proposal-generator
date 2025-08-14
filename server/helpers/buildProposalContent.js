@@ -1,4 +1,4 @@
-const { convertNumberToText, readFile, parseJson } = require("../utils/fileUtils");
+const { capitalizeText, convertNumberToText, readFile, parseJson } = require("../utils/fileUtils");
 
 function buildProposalContent(data) {
     const { language: lang, documentCode } = data;

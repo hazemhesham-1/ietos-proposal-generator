@@ -6,6 +6,7 @@ import { getOperations } from "@/services/apiOperations";
 import NavButtons from "@/components/NavButtons";
 import OMProposalForm from "@/features/proposals/OMProposalForm";
 import RehabProposalForm from "@/features/proposals/RehabProposalForm";
+import { useEffect } from "react";
 
 const OperationDetails = () => {
     const navigate = useNavigate();
@@ -13,9 +14,11 @@ const OperationDetails = () => {
     
     const dispatch = useDispatch();
     const data = useLoaderData();
-    if(type === "rehab") {
+
+    useEffect(() => {
+        if(type !== "rehab") return;
         dispatch(initEquipmentList(data));
-    }
+    }, []);
 
     return (
         <>
@@ -37,8 +40,6 @@ export async function loader({ params }) {
         const equipments = await getEquipments();
         return equipments;
     }
-
-    throw new Response("Not Found", { status: 404 });
 }
 
 export default OperationDetails;

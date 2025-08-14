@@ -33,10 +33,15 @@
         "table": {
             "equipmentList": "List of Equipment",
             "equipmentName": "Equipment Name",
-            "actions": "Actions"
+            "actions": "Actions",
+            "columns": "Columns"
+        },
+        "placeholders": {
+            "filterEmails": "Filter emails..."
         }
     },
     "messages": {
+        "noResults": "No results",
         "generateDocument": {
             "title": "Finalize & Generate Proposal",
             "description": "You’ve completed all the required steps. Now, generate a tailored technical proposal for your water treatment solution. Review the content after generation to ensure accuracy and alignment with client needs."
