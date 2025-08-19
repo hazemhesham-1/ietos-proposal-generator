@@ -5,8 +5,7 @@ const Employee = require("../models/Employee");
 async function handleLogin(req, res) {
     const cookies = req.cookies;
     const { email, password } = req.body;
-    console.log(email);
-
+    
     if(!email || !password) {
         return res.status(400).json({ message: "Email and password are required." });
     }

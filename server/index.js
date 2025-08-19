@@ -17,14 +17,6 @@ const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 connectDB();
-const Employee = require("./models/Employee");
-
-app.get("/debug-user", async (req, res) => {
-    const email = req.query.email?.trim().toLowerCase();
-    console.log(req.query);
-    const user = await Employee.findOne({ email });
-    res.json({ user });
-});
 
 app.use(credentials);
 app.use(cors(corsOptions));
