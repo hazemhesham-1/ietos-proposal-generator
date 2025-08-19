@@ -10,11 +10,14 @@ async function handleLogin(req, res) {
     }
 
     const foundUser = await Employee.findOne({ email }).exec();
+    console.log(foundUser);
+    console.log(password);
     if(!foundUser) {
-        return res.status(401).json({ message: "Authentication failed. Please try again." });
+        return res.status(401).json({ message: "Invalid email or password." });
     }
 
     const isMatch = await foundUser.comparePassword(password);
+    console.log(isMatch);
     if(!isMatch) {
         return res.status(401).json({ message: "Authentication failed. Please try again." });
     }
