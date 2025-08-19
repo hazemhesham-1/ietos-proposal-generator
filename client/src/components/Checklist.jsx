@@ -17,10 +17,10 @@ const Checklist = ({ title, name, itemsList, icon }) => {
             </div>
             {itemsList?.map((item) => (
                 <CustomFormField
-                    key={item.id}
+                    key={item._id}
                     type="checkbox"
                     name={name}
-                    item={item}
+                    item={{ ...item, id: item._id }}
                     label={item.label[lang]}
                 />
             ))}

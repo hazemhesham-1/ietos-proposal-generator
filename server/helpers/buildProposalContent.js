@@ -1,25 +1,36 @@
-const { capitalizeText, convertNumberToText, readFile, parseJson } = require("../utils/fileUtils");
+const { capitalizeText, convertNumberToText, parseJson } = require("../utils/fileUtils");
+const WorkItem = require("../models/WorkItem");
+const Equipment = require("../models/Equipment");
+const EquipmentField = require("../models/EquipmentField");
 
-function buildProposalContent(data) {
+async function buildProposalContent(data) {
     const { language: lang, documentCode } = data;
 
     const projectGovernorate = parseJson(data.projectGovernorate);
     const plantType = parseJson(data.plantType);
     const currency = parseJson(data.currency);
 
-    const operationsData = {};
-    const financialData = {};
+    const operationsData = {
+        tasks: { list: [], isIncluded: false },
+        manpower: { list: [], isIncluded: false },
+        chemicalManagement: { list: [], isIncluded: false },
+        operationSchedule: {},
+        replacements: {},
+        reports: { list: [], isIncluded: false },
+        excludedTasks: { list: [], isIncluded: false },
+    };
 
+    const financialData = {};
+    
     if(documentCode === "REH") {
-        const equipments = readFile("equipments.json");
-        const actions = readFile("actions.json");
-        const specs = readFile("specification.json");
+        const equipment = await Equipment.find({});
+        const specifications = await EquipmentField.find({});
 
         const installationTasks = [];
         let totalCost = 0;
 
         for(let i = 0; i < data.equipments.length; ++i) {
-            const item = getEquipmentData(data.equipments[i], { actions, equipments, specs }, lang);
+            const item = getEquipmentData(data.equipments[i], { equipment, specifications }, lang);
             totalCost += item.totalPrice;
             installationTasks.push({ ...item, index: i+1 });
         }
@@ -29,38 +40,25 @@ function buildProposalContent(data) {
         financialData.totalCostText = `${convertNumberToText(totalCost, lang)} ${currency.name[lang]}`;
     }
     else {
-        const { workValue: monthlyAmount } = data;
+        const workOperations = await WorkItem.find({});
 
-        const operations = readFile("operations.json");
+        const {
+            workValue: monthlyAmount,
+            operationScope: selectedTasks
+        } = data;
 
-        const scheduleTasks = processItems(operations.schedules, data.operationSchedule, {
-            daily: [],
-            weekly: [],
-            monthly: [],
-        }, lang);
+        operationsData.tasks = transformItems(workOperations, selectedTasks, lang);
+        operationsData.manpower = transformItems(workOperations, data.manpower, lang);
+        operationsData.chemicalManagement = transformItems(workOperations, data.chemicalManagement, lang);
+        operationsData.operationSchedule = transformItems(workOperations, data.operationSchedule, lang, true);
+        operationsData.replacements = transformItems(workOperations, data.replacements, lang, true);
+
+        operationsData.reports.list = data.reports.map((item) => ({ value: item.value })) || [];
+        operationsData.reports.isIncluded = data?.reports?.length > 0;
+
+        const operationItems = workOperations.filter((work) => work.type === "operations");
+        operationsData.excludedTasks = transformItems(operationItems, selectedTasks, lang, false, false);
         
-        const replacementTasks = processItems(operations.replacements, data.replacements, {
-            parts: [],
-            process: [],
-        }, lang);
-
-        operationsData.operationSchedule = {
-            ...scheduleTasks,
-            hasDaily: scheduleTasks.daily.length > 0,
-            hasWeekly: scheduleTasks.weekly.length > 0,
-            hasMonthly: scheduleTasks.monthly.length > 0,
-        };
-        operationsData.replacements = {
-            ...replacementTasks,
-            hasSparePartsList: replacementTasks.parts.length > 0,
-            hasExtraReplacements: replacementTasks.process.length > 0,
-        };
-        operationsData.tasks = filterAndMap(operations.tasks, data.operationScope, lang);
-        operationsData.reports = data.reports.map((item) => ({ value: item.value }));
-        operationsData.manpower = filterAndMap(operations.manpower, data.manpower, lang);
-        operationsData.chemicalManagement = filterAndMap(operations.chemicals, data.chemicalManagement, lang);
-        operationsData.excludedTasks = filterAndMap(operations.tasks, data.operationScope, lang, false);
-
         const totalMonthlyAmount = Math.round(monthlyAmount * 1.14);
         const totalAnnualAmount = Math.round(monthlyAmount * 1.14 * 12);
 
@@ -81,7 +79,7 @@ function buildProposalContent(data) {
         issueDateString: new Date(data.issueDate).toLocaleString(lang === "ar" ? "ar-EG" : "en-US", { month: "long", year: "numeric" }),
         projectGovernorate: projectGovernorate?.name[lang],
         plantType: plantType?.name[lang],
-        plantTypeShort: plantType?.short,
+        plantTypeShort: plantType?.value,
         treatmentType: plantType?.treatment[lang],
         workScope: operationsData,
         finance: {
@@ -100,52 +98,58 @@ function getOptionLabel(options, key, value) {
     return labels;
 }
 
-function processItems(list, items, groupedItems, language = "en") {
-    list.forEach((group) => (
-        group.list.forEach((item) => {
-            if(items.includes(item.id)) {
-                groupedItems[group.value].push({ value: item.label[language] });
+function transformItems(sourceItems, targetIds, language = "en", groupByType = false, includeMatched = true) {
+    const filteredItems = sourceItems.filter(({ _id }) => targetIds.includes(_id.toString()) === includeMatched);
+
+    if(groupByType) {
+        const groupedResult = {};
+        for(const item of filteredItems) {
+            if(!groupedResult[item.type]) {
+                groupedResult[item.type] = { list: [], isIncluded: false };
             }
-        })
-    ));
+            groupedResult[item.type].list.push({ value: item.label[language] });
+            groupedResult[item.type].isIncluded = true;
+        }
+        return groupedResult;
+    }
 
-    return groupedItems;
-}
+    const result = {
+        list: [],
+        isIncluded: false,
+    };
 
-function filterAndMap(data, list, language = "en", included = true) {
-    const filteredData = data.filter((item) => list.includes(item.id) === included);
-    const mappedData = filteredData.map((item) => ({ value: item.label[language] }));
-    
-    return mappedData;
+    result.list = filteredItems.map((item) => ({ value: item.label[language] }));
+    result.isIncluded = filteredItems.length > 0;
+
+    return result;
 }
 
 function getEquipmentData(item, resources, lang = "en") {
     const { unit, quantity } = item;
-    const { actions, equipments, specs } = resources;
+    const { equipment, specifications } = resources;
 
-    const actionLabel = actions.find(({ value }) => value === item.actionType).label[lang];
-    const category = equipments.find(({ value }) => value === item.category)?.data[lang];
-    const equipmentLabel = category.equipments.find(({ value }) => value === item.equipment).label;
+    const actionLabel = JSON.parse(item.actionType)?.[lang];
+    const itemLabel = equipment.find(({ value }) => value === item.equipment)?.label[lang];
 
     const processedItem = {};
     if(lang === "ar") {
-        const supplyItem = `${item.type ? item.type : equipmentLabel}${item.location ? ` في ${item.location}` : ""}`;
+        const supplyItem = `${item.type ? item.type : itemLabel}${item.location ? ` في ${item.location}` : ""}`;
         processedItem.task = `${actionLabel} ${supplyItem}`;
         processedItem.item = supplyItem;
-        processedItem.unit = getOptionLabel(specs, "unit", unit)[lang];
+        processedItem.unit = getOptionLabel(specifications, "unit", unit)[lang];
     }
     else if(lang === "en") {
-        let supplyItem = `${item.type ? capitalizeText(item.type) : equipmentLabel}`;
+        let supplyItem = `${item.type ? capitalizeText(item.type) : itemLabel}`;
         supplyItem += `${item.location ? ` at ${capitalizeText(item.location)}` : ""}`;
         processedItem.task = `${actionLabel} of ${supplyItem}`;
         processedItem.item = supplyItem;
         processedItem.unit = unit;
     }
 
-    const casingMaterial = getOptionLabel(specs, "casingMaterial", item?.casingMaterial)?.en;
-    const impellerMaterial = getOptionLabel(specs, "impellerMaterial", item?.impellerMaterial)?.en;
-    const shaftMaterial = getOptionLabel(specs, "shaftMaterial", item?.shaftMaterial)?.en;
-    const protection = getOptionLabel(specs, "protection", item?.protection)?.en;
+    const casingMaterial = getOptionLabel(specifications, "casingMaterial", item?.casingMaterial)?.en;
+    const impellerMaterial = getOptionLabel(specifications, "impellerMaterial", item?.impellerMaterial)?.en;
+    const shaftMaterial = getOptionLabel(specifications, "shaftMaterial", item?.shaftMaterial)?.en;
+    const protection = getOptionLabel(specifications, "protection", item?.protection)?.en;
 
     const itemDetails = {
         ...item,
@@ -158,7 +162,7 @@ function getEquipmentData(item, resources, lang = "en") {
 
     const itemData = {
         ...processedItem,
-        specifications: getEquipmentSpecs(itemDetails),
+        specifications: getSpecifications(itemDetails),
         quantity,
         price: item.price,
         totalPrice: unit !== "LS" ? Number(item.price) * item.quantity : Number(item.price),
@@ -167,7 +171,7 @@ function getEquipmentData(item, resources, lang = "en") {
     return itemData;
 }
 
-function getEquipmentSpecs(item) {
+function getSpecifications(item) {
     const specifications = [];
     const parameters = {
         quantity: "Quantity\t\t:\t{value}",

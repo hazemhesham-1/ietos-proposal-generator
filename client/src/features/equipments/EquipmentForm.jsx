@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { closeModal, nextStep, prevStep, setEquipmentData } from "./equipmentSlice";
+import { useGetEquipmentQuery } from "./equipmentApiSlice";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/Form";
+import Loader from "@/components/Loader";
 import CategoryCard from "./CategoryCard";
 import EquipmentDetails from "./EquipmentDetails";
 import EquipmentSpecs from "./EquipmentSpecs";
@@ -20,23 +22,30 @@ const defaultValues = {
 };
 
 const EquipmentForm = () => {
+    const dispatch = useDispatch();
+    const { data: equipmentFormData, isModalOpen, isEditModal, currentStep } = useSelector((state) => state.equipment);
+    const { data: equipmentData, isLoading } = useGetEquipmentQuery();
+
     const { t, i18n } = useTranslation();
     const methods = useForm({ defaultValues });
-    
-    const dispatch = useDispatch();
-    const { isModalOpen, isEditModal, data: equipmentData, currentStep: modalStep, list: equipmentsList } = useSelector((state) => state.equipment);
-    const equipments = equipmentsList?.map(({ data, fields, value }) => ({ ...data[i18n.language], fields, value }));
-
-    const category = methods.watch("category");
-    const selectedCategory = equipments?.find((equipment) => equipment.value === category);
-    const stepKeys = ["equipmentCategory", "equipmentDetails", "equipmentSpecs"];
-
-    const isLastStep = modalStep === stepKeys.length;
+    const lang = i18n.language;
 
     useEffect(() => {
         if(!isEditModal) return;
-        methods.reset(equipmentData);
+
+        methods.reset(equipmentFormData);
     }, [isEditModal]);
+
+    if(isLoading) return <Loader/>;
+
+    const category = methods.watch("category");
+    const selectedCategory = equipmentData?.categories.find((item) => item.value === category);
+    const filteredItems = equipmentData?.equipment.filter((item) => item.category === selectedCategory?.value);
+    const categoryWithEquipment = { category: selectedCategory?.label[lang], items: filteredItems };
+
+    const stepKeys = ["equipmentCategory", "equipmentDetails", "equipmentSpecs"];
+
+    const isLastStep = currentStep === stepKeys.length;
 
     function onSubmit(data) {
         if(!isLastStep) {
@@ -70,35 +79,30 @@ const EquipmentForm = () => {
                             </DialogTitle>
                         </DialogHeader>
                         <div className="space-y-4 px-4 py-2 max-h-[400px] overflow-auto md:px-6">
-                            {(modalStep <= stepKeys.length) && (
+                            {(currentStep <= stepKeys.length) && (
                                 <DialogDescription>
-                                    {t(`dialog.steps.${stepKeys[modalStep-1]}`, { step: modalStep })}
+                                    {t(`dialog.steps.${stepKeys[currentStep-1]}`, { step: currentStep })}
                                 </DialogDescription>
                             )}
-                            {(modalStep === 1) && (
+                            {(currentStep === 1) && (
                                 <ul className="grid gap-4 md:grid-cols-2">
-                                    {equipments?.map((equipment, i) => (
+                                    {equipmentData?.categories.map((item, i) => (
                                         <CategoryCard
-                                            key={equipment.value}
-                                            id={`cat-${i+1}`}
-                                            label={equipment.category}
-                                            value={equipment.value}
-                                            description={equipment.description}
-                                            image={`/equipments/${equipment.value}.png`}
+                                            key={item.value}
+                                            id={item.value}
+                                            label={item.label[lang]}
+                                            value={item.value}
+                                            description={item.description[lang]}
+                                            image={`/equipments/${item.value}.png`}
                                         />
                                     ))}
                                 </ul>
                             )}
-                            {(modalStep === 2) && (
-                                <EquipmentDetails
-                                    category={selectedCategory.category}
-                                    equipments={selectedCategory.equipments}
-                                />
-                            )}
+                            {(currentStep === 2) && <EquipmentDetails equipment={categoryWithEquipment}/>}
                             {isLastStep && <EquipmentSpecs keys={selectedCategory?.fields}/>}
                         </div>
                         <DialogFooter className="flex flex-col p-4 md:p-6 sm:flex-row">
-                            {modalStep > 1 && (
+                            {currentStep > 1 && (
                                 <Button type="button" onClick={() => dispatch(prevStep())}>
                                     {t("buttons.previous")}
                                 </Button>

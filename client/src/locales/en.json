@@ -42,6 +42,14 @@
     },
     "messages": {
         "noResults": "No results",
+        "loginScreen": {
+            "title": "Welcome to IETOS O&M Portal",
+            "description": "Please log in using your company email and password.",
+            "overlay": {
+                "title": "Egypt’s Trusted Partner in Water Treatment Operations",
+                "message": "At IETOS, our O&M team keeps water treatment plants running smoothly—every day, everywhere."
+            }
+        },
         "generateDocument": {
             "title": "Finalize & Generate Proposal",
             "description": "You’ve completed all the required steps. Now, generate a tailored technical proposal for your water treatment solution. Review the content after generation to ensure accuracy and alignment with client needs."
@@ -153,7 +161,9 @@
             "paymentTerms": "Terms of Payment",
             "actionType": "Action Type",
             "equipment": "{{category}} Type",
-            "equipmentLocation": "Location of the Equipment"
+            "equipmentLocation": "Location of the Equipment",
+            "email": "Email Address",
+            "password": "Password"
         },
         "placeholders": {
             "contractDuration": "e.g., 12 months",
@@ -174,7 +184,9 @@
             "paymentTerms": "Enter payment term (e.g. 30 days)",
             "actionType": "Select the action to perform",
             "equipment": "Select {{category}} type",
-            "equipmentLocation": "e.g., at the balance tank or Unit 03 Room A"
+            "equipmentLocation": "e.g., at the balance tank or Unit 03 Room A",
+            "email": "username@iwomt.com",
+            "password": "Enter your password"
         },
         "descriptions": {
             "contractDuration": "Specify the duration of the contract period.",
@@ -192,7 +204,9 @@
             "paymentTerms": "Add one or more payment terms for this offer.",
             "actionType": "Choose the purpose of this operation (e.g., install or replace the equipment)",
             "equipment": "Choose the type of {{category}} used in the system",
-            "equipmentLocation": "Specify the exact physical location of the equipment within the plant"
+            "equipmentLocation": "Specify the exact physical location of the equipment within the plant",
+            "email": "Enter your company email used for login",
+            "password": "Use the password provided by your administrator."
         }
     },
     "header": {

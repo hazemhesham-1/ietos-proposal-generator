@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import { useGetEquipmentFieldsQuery } from "./equipmentApiSlice";
 import CustomFormField from "@/components/CustomFormField";
+import Loader from "@/components/Loader";
 
 const EquipmentSpecs = ({ keys }) => {
-    const [fields, setFields] = useState([]);
+    const { data: fields, isLoading } = useGetEquipmentFieldsQuery();
 
-    useEffect(() => {
-        async function getFieldTypes() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/specification-fields`);
-                setFields(response?.data);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-
-        getFieldTypes();
-    }, []);
+    if(isLoading) return <Loader/>;
 
     return (
         <div className="space-y-5 mt-6">
@@ -38,7 +26,7 @@ const EquipmentField = ({ name, fields }) => {
     const lang = i18n.language;
 
     const field = fields?.find((field) => field.key === name);
-    const options = field?.options?.map(({ labels, value }) => ({ label: labels[lang], value }));
+    const options = field?.options?.map(({ label, value }) => ({ label: label[lang], value }));
 
     return (
         <CustomFormField

@@ -5,10 +5,11 @@ import CustomFormField from "./CustomFormField";
 
 const NestedChecklist = ({ title, name, itemsList, icon }) => {
     const [items, setItems] = useState([]);
+    
     const { watch, setValue } = useFormContext();
-
     const lang = watch("language");
     const itemsField = watch(name);
+
     const isIncluded = (item, arr) => arr.some((value) => item.startsWith(value));
 
     function onItemChecked(item, checked) {
@@ -36,14 +37,14 @@ const NestedChecklist = ({ title, name, itemsList, icon }) => {
                         />
                         <p>{item.label[lang]}</p>
                     </div>
-                    {(items.includes(item.value) && (item?.list.length > 0)) && (
+                    {items.includes(item.value) && (
                         <div className="space-y-2 mt-2 mb-5">
                             {item?.list.map((subItem) => (
                                 <CustomFormField
-                                    key={subItem.id}
+                                    key={subItem._id}
                                     type="checkbox"
                                     name={name}
-                                    item={subItem}
+                                    item={{ ...subItem, id: subItem._id }}
                                     label={subItem.label[lang]}
                                 />
                             ))}

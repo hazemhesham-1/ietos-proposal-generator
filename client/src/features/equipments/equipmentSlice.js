@@ -5,16 +5,12 @@ const initialState = {
     isModalOpen: false,
     currentStep: 1,
     data: {},
-    list: [],
 };
 
 const equipmentSlice = createSlice({
     name: "equipment",
     initialState,
     reducers: {
-        initEquipmentList: (state, action) => {
-            state.list = action.payload;
-        },
         setEquipmentData: (state, action) => {
             state.data = { ...state.data, ...action.payload };
         },
@@ -46,6 +42,6 @@ const equipmentSlice = createSlice({
     }
 });
 
-export const { initEquipmentList, setEquipmentData, resetEquipment, nextStep, prevStep, openModal, openEditModal, closeModal } = equipmentSlice.actions;
+export const { setEquipmentData, resetEquipment, nextStep, prevStep, openModal, openEditModal, closeModal } = equipmentSlice.actions;
 
 export default equipmentSlice.reducer;

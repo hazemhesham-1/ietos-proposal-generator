@@ -1,62 +1,30 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import { useGetCurrenciesQuery, useGetGovernoratesQuery } from "../data/dataApiSlice";
+import { LANGUAGES } from "@/constants/languages";
+import Loader from "@/components/Loader";
 import CustomFormField from "@/components/CustomFormField";
 import NavButtons from "@/components/NavButtons";
 
 const ClientDetails = () => {
     const { t, i18n } = useTranslation();
     const { type: proposalType } = useParams();
-    const [governorates, setGovernorates] = useState([]);
-    const [currencies, setCurrencies] = useState([]);
+    const { data: governorates, isLoading: isGovernoratesLoading } = useGetGovernoratesQuery();
+    const { data: currencies, isLoading: isCurrenciesLoading } = useGetCurrenciesQuery();
 
-    const languages = [
-        {
-            label: {
-                ar: "العربية",
-                en: "Arabic"
-            },
-            value: "ar"
-        },
-        {
-            label: {
-                ar: "الإنجليزية",
-                en: "English"
-            },
-            value: "en"
-        },
-    ];
+    const lang = i18n.language;
 
-    useEffect(() => {
-        async function getGovernorates() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/governorates`);
-                
-                const listOptions = response.data.map((option) => ({ label: option.name[i18n.language], value: JSON.stringify(option) }));
-                setGovernorates(listOptions);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-        async function getCurrencies() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/currencies`);
+    const governorateOptions = governorates?.map((governorate) => ({
+        label: governorate.name[lang],
+        value: JSON.stringify(governorate)
+    }));
 
-                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name.en, value: JSON.stringify(option) }));
-                setCurrencies(listOptions);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-
-        getGovernorates();
-        if(proposalType === "rehab") {
-            getCurrencies();
-        }
-    }, []);
+    const languageOptions = LANGUAGES.map((language) => ({
+        label: language.label[lang],
+        value: language.value
+    }));
+    
+    if(isGovernoratesLoading || isCurrenciesLoading) return <Loader/>;
 
     return (
         <>
@@ -83,7 +51,7 @@ const ClientDetails = () => {
                 name="projectGovernorate"
                 label={t("forms.labels.projectGovernorate")}
                 placeholder={t("forms.placeholders.projectGovernorate")}
-                options={governorates}
+                options={governorateOptions}
                 description={t("forms.descriptions.projectGovernorate")}
             />
             <CustomFormField
@@ -108,7 +76,7 @@ const ClientDetails = () => {
                 name="language"
                 label={t("forms.labels.proposalLanguage")}
                 placeholder={t("forms.placeholders.proposalLanguage")}
-                options={languages.map((lang) => ({ label: lang.label[i18n.language], value: lang.value }))}
+                options={languageOptions}
             />
             {proposalType === "rehab" && (
                 <CustomFormField

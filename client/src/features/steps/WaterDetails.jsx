@@ -1,30 +1,19 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import { useGetTreatmentTypesQuery } from "../data/dataApiSlice";
+import Loader from "@/components/Loader";
 import CustomFormField from "@/components/CustomFormField";
 import NavButtons from "@/components/NavButtons";
 
 const WaterDetails = () => {
     const navigate = useNavigate();
+    const { data, isLoading } = useGetTreatmentTypesQuery();
     const { t, i18n } = useTranslation();
-    const [plantTypes, setPlantTypes] = useState([]);
+    const lang = i18n.language;
 
-    useEffect(() => {
-        async function getTreatmentTypes() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/treatment-types`);
-
-                const listOptions = response.data.map((option) => ({ label: option.name[i18n.language], value: JSON.stringify(option) }));
-                setPlantTypes(listOptions);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-
-        getTreatmentTypes();
-    }, []);
+    const plantTypes = data?.map((option) => ({ label: option.name[lang], value: JSON.stringify(option) }));
+    
+    if(isLoading) return <Loader/>;
 
     return (
         <>

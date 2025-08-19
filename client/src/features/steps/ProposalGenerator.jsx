@@ -1,8 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { SparklesIcon } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import Spinner from "@/components/Spinner";
+import SubmitButton from "@/components/SubmitButton";
 
 const ProposalGenerator = () => {
     const { formState: { isSubmitting } } = useFormContext();
@@ -16,16 +15,10 @@ const ProposalGenerator = () => {
             <p className="text-slate-500 text-xl">
                 {t("messages.generateDocument.description")}
             </p>
-            <Button size="lg" className="h-12 w-full max-w-xl">
-                {!isSubmitting ? (
-                    <>
-                        <SparklesIcon className="size-4"/>
-                        {t("buttons.generateProposal")}
-                    </>
-                ) : (
-                    <Spinner/>
-                )}
-            </Button>
+            <SubmitButton isSubmitting={isSubmitting}>
+                <SparklesIcon className="size-4"/>
+                {t("buttons.generateProposal")}
+            </SubmitButton>
         </div>
     );
 };

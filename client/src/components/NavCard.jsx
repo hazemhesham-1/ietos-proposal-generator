@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const NavCard = ({ title, description, href, imageSrc, imageAlt }) => {
     return (
-        <a
-            href={href}
+        <Link
+            to={href}
             className="bg-gradient-to-r from-slate-100 to-slate-300/50 rounded-lg grid items-center group md:grid-cols-2 hover:to-primary-500/50 hover:scale-105 transition"
         >
             <img
@@ -17,7 +19,7 @@ const NavCard = ({ title, description, href, imageSrc, imageAlt }) => {
                     {description}
                 </p>
             </div>
-        </a>
+        </Link>
     );
 };
 

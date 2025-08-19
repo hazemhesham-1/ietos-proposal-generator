@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import { useGetCurrenciesQuery } from "../data/dataApiSlice";
 import { isValidJSON } from "@/lib/utils";
+import Loader from "@/components/Loader";
 import CustomFormField from "@/components/CustomFormField";
 
 const MonthlyWorkForm = () => {
-    const [currencies, setCurrencies] = useState([]);
+    const { data: currencies, isLoading } = useGetCurrenciesQuery();
     const { watch } = useFormContext();
     const { t } = useTranslation();
 
-    useEffect(() => {
-        async function getCurrencies() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/lookup/currencies`);
-
-                const listOptions = response.data.map(({ _id, ...option }) => ({ label: option.name.en, value: JSON.stringify(option) }));
-                setCurrencies(listOptions);
-            }
-            catch(err) {
-                console.error(err.message);
-            }
-        }
-        
-        getCurrencies();
-    }, []);
+    if(isLoading) return <Loader/>;
 
     const monthlyWorkValue = watch("workValue");
     const currencyValue = watch("currency");

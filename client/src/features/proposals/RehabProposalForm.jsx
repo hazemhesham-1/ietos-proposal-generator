@@ -5,30 +5,31 @@ import { useTranslation } from "react-i18next";
 import { PlusIcon, WrenchIcon } from "lucide-react";
 import { openModal, resetEquipment } from "../equipments/equipmentSlice";
 import { Button } from "@/components/ui/Button";
-import EquipmentsTable from "../equipments/EquipmentsTable";
+import EquipmentTable from "../equipments/EquipmentTable";
 
 const RehabProposalForm = () => {
-    const { t } = useTranslation();
-    const { setValue, watch } = useFormContext();
-    const equipments = watch("equipments");
-
-    const { data: equipmentData, isEditModal } = useSelector((state) => state.equipment);
     const dispatch = useDispatch();
+    const { data: equipmentFormData, isEditModal } = useSelector((state) => state.equipment);
+    
+    const { setValue, watch } = useFormContext();
+    const selectedEquipment = watch("equipments");
+
+    const { t } = useTranslation();
 
     useEffect(() => {
-        if((Object.keys(equipmentData).length === 0) || isEditModal) return;
+        if((Object.keys(equipmentFormData).length === 0) || isEditModal) return;
 
-        const isEdited = equipments.some((equipment) => equipment.id === equipmentData.id);
+        const isEdited = selectedEquipment.some((equipment) => equipment.id === equipmentFormData.id);
         if(isEdited) {
-            const updatedEquipments = equipments.map((equipment) => equipment.id === equipmentData.id ? equipmentData : equipment);
+            const updatedEquipments = selectedEquipment.map((equipment) => equipment.id === equipmentFormData.id ? equipmentFormData : equipment);
             setValue("equipments", updatedEquipments);
         }
         else {
-            setValue("equipments", [ ...equipments, equipmentData ]);
+            setValue("equipments", [ ...selectedEquipment, equipmentFormData ]);
         }
 
         dispatch(resetEquipment());
-    }, [equipmentData]);
+    }, [equipmentFormData]);
 
     return (
         <div className="space-y-5">
@@ -50,7 +51,7 @@ const RehabProposalForm = () => {
             <p className="text-muted-foreground text-sm">
                 {t("forms.descriptions.workScope")}
             </p>
-            {equipments.length > 0 && <EquipmentsTable equipments={equipments}/>}
+            {selectedEquipment.length > 0 && <EquipmentTable equipment={selectedEquipment}/>}
         </div>
     );
 };
