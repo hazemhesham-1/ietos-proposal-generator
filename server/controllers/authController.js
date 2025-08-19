@@ -1,23 +1,22 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const Employee = require("../models/Employee");
 
 async function handleLogin(req, res) {
     const cookies = req.cookies;
     const { email, password } = req.body;
+    console.log(email);
 
     if(!email || !password) {
         return res.status(400).json({ message: "Email and password are required." });
     }
 
     const foundUser = await Employee.findOne({ email }).exec();
-    console.log(foundUser);
-    console.log(password);
     if(!foundUser) {
         return res.status(401).json({ message: "Invalid email or password." });
     }
 
     const isMatch = await foundUser.comparePassword(password);
-    console.log(isMatch);
     if(!isMatch) {
         return res.status(401).json({ message: "Authentication failed. Please try again." });
     }
