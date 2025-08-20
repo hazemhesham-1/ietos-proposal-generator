@@ -1,47 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { setCredentials } from "../features/auth/authSlice";
+import { useSelector } from "react-redux";
+import { useRefreshMutation } from "../features/auth/authApiSlice";
 import Loader from "@/components/Loader";
+import EmployeeLogin from "./EmployeeLogin";
 
 const ProtectedRoute = () => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => !!state.auth.token);
+    const [refresh, { isLoading, isError }] = useRefreshMutation();
     const location = useLocation();
+    const isMounted = useRef(false);
 
     useEffect(() => {
-        if(isAuthenticated) {
-            setIsLoading(false);
-            return;
+        if(!isMounted.current && (process.env.NODE_ENV === "development")) {
+            return () => isMounted.current = true;
         }
 
         async function verifyRefreshToken() {
-            setIsLoading(true);
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/refresh`, { withCredentials: true });
-                dispatch(setCredentials(response.data));
+                await refresh();
             }
             catch(err) {
                 console.error(err);
             }
-            finally {
-                setIsLoading(false);
-            }
         }
 
-        verifyRefreshToken();
+        if(!isAuthenticated) {
+            verifyRefreshToken();
+        }
     }, []);
 
-    if(isLoading) return <Loader/>;
+    if(isLoading) {
+        return <Loader/>;
+    }
+    else if(isError) {
+        return <Navigate to="/auth/employee/login" state={{ from: location }} replace/>;
+    }
 
-    return isAuthenticated ? (
-        <Outlet/>
-    ) : (
-        <Navigate to="/auth/employee/login" state={{ from: location }} replace/>
-    );
+    return isAuthenticated ? <Outlet/> : <EmployeeLogin/>;
 };
 
 export default ProtectedRoute;

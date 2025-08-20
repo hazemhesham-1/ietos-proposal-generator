@@ -9,8 +9,8 @@ import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 
 const defaultValues = {
-    email: "nehad.ahmed@iwomt.com",
-    password: "12345678"
+    email: "",
+    password: ""
 };
 
 const EmployeeLogin = () => {
@@ -26,7 +26,7 @@ const EmployeeLogin = () => {
         try {
             setError("");
             const employeeData = await login(credentials).unwrap();
-            dispatch(setCredentials({ ...employeeData, email: credentials.email }));
+            dispatch(setCredentials({ ...employeeData }));
 
             navigate("/");
         }

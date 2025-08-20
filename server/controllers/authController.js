@@ -1,4 +1,3 @@
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const Employee = require("../models/Employee");
 
@@ -12,7 +11,7 @@ async function handleLogin(req, res) {
 
     const foundUser = await Employee.findOne({ email }).exec();
     if(!foundUser) {
-        return res.status(401).json({ message: "Invalid email or password." });
+        return res.status(401).json({ message: "Authentication failed. Please try again." });
     }
 
     const isMatch = await foundUser.comparePassword(password);
@@ -53,6 +52,20 @@ async function handleLogin(req, res) {
     });
 
     res.json({ accessToken });
+}
+
+async function handleLogout(req, res) {
+    const cookies = req.cookies;
+    if(!cookies.jwt) {
+        return res.status(204).json({ message: "No active session to log out" });
+    }
+
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+    });
+    res.json({ message: "Successfully logged out" });
 }
 
 async function handleRefreshToken(req, res) {
@@ -118,4 +131,4 @@ async function handleRefreshToken(req, res) {
     }
 }
 
-module.exports = { handleLogin, handleRefreshToken };
+module.exports = { handleLogin, handleLogout, handleRefreshToken };
